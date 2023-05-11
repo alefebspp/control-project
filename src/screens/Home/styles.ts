@@ -6,6 +6,7 @@ export const Container = styled.View`
   width: 100%;
   height: 100%;
   background-color: ${({theme}) => theme.COLORS.GRAY_100};
+  gap: 10px;
 `;
 
 export const Header = styled.View`
@@ -29,4 +30,22 @@ export const BackIcon = styled(CaretLeft).attrs(({theme}) => ({
 export const Logo = styled.Image`
   width: 50px;
   height: 50px;
+`;
+
+export const RegistriesContainer = styled.View`
+  width: 100%;
+  height: 80%;
+  padding: 10px;
+`;
+
+export const Registry = styled.View`
+  width: 100%;
+  background-color: ${({theme}) => theme.COLORS.WHITE};
+  flex-direction: row;
+  margin-bottom: 10px;
+  justify-content: space-evenly;
+`;
+
+export const RegistryText = styled.Text`
+  color: ${({theme}) => theme.COLORS.GRAY_100};
 `;
