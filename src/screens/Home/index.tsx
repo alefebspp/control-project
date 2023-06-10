@@ -1,58 +1,116 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Container,
   Header,
-  Logo,
   BackButton,
   BackIcon,
   RegistriesContainer,
   Registry,
   RegistryText,
+  RegistryTextContainer,
+  AddRegistryButton,
+  AddRegistryIcon,
 } from './styles';
-import logo from '../../assets/clock.jpg';
-import {FlatList} from 'react-native';
+import {formatDateToDayMonth, formatRegistryTime} from '../../utils';
+import {useNavigation} from '@react-navigation/native';
+import {useReactQueryHook} from '../../hooks/useReactQueryHook';
+import {Registry as RegistryInterface} from '../../services/RegistriesRequests/interface';
+import {NavigationProps} from '../../routes/interface';
 
 interface Registry {
   date: string;
-  hour: string;
+  start: string;
+  end: string;
+  interval_start: string;
+  interval_end: string;
   id: string;
 }
 
 export const Home: React.FC = () => {
-  const fakeRegistries = [
-    {
-      id: '1',
-      date: '11/05',
-      hour: '11:56',
-    },
-    {
-      id: '2',
-      date: '12/05',
-      hour: '12:00',
-    },
-  ];
+  const {listRegistries} = useReactQueryHook({});
 
-  const [registries, setRegistries] = useState<Registry[]>(fakeRegistries);
+  const {data: registries} = listRegistries();
+
+  const {navigate, goBack} = useNavigation<NavigationProps>();
+
+  const handleGoBack = () => {
+    goBack();
+  };
+
+  const handleNavigate = () => {
+    navigate('registry', {});
+  };
 
   return (
     <Container>
       <Header>
-        <BackButton>
+        <BackButton onPress={handleGoBack}>
           <BackIcon />
         </BackButton>
-        <Logo source={logo} />
+        <AddRegistryButton onPress={handleNavigate}>
+          <AddRegistryIcon />
+        </AddRegistryButton>
       </Header>
       <RegistriesContainer>
-        <FlatList
-          renderItem={({item}) => (
-            <Registry>
-              <RegistryText>{item.date}</RegistryText>
-              <RegistryText>{item.hour}</RegistryText>
+        <Registry>
+          <RegistryTextContainer>
+            <RegistryText>Data</RegistryText>
+          </RegistryTextContainer>
+
+          <RegistryTextContainer>
+            <RegistryText>Entrada</RegistryText>
+          </RegistryTextContainer>
+
+          <RegistryTextContainer>
+            <RegistryText>I.Interv.</RegistryText>
+          </RegistryTextContainer>
+
+          <RegistryTextContainer>
+            <RegistryText>F.Interv.</RegistryText>
+          </RegistryTextContainer>
+
+          <RegistryTextContainer>
+            <RegistryText>Saída</RegistryText>
+          </RegistryTextContainer>
+        </Registry>
+        {registries?.map((registry: RegistryInterface) => {
+          return (
+            <Registry
+              onPress={() =>
+                navigate('registry', {registryDate: registry.date})
+              }
+              key={registry.id}>
+              <RegistryTextContainer>
+                <RegistryText>
+                  {formatDateToDayMonth(registry?.date)}
+                </RegistryText>
+              </RegistryTextContainer>
+              <RegistryTextContainer>
+                <RegistryText>
+                  {formatRegistryTime(registry?.start) ?? '--'}
+                </RegistryText>
+              </RegistryTextContainer>
+
+              <RegistryTextContainer>
+                <RegistryText>
+                  {formatRegistryTime(registry?.interval_start) ?? '--'}
+                </RegistryText>
+              </RegistryTextContainer>
+
+              <RegistryTextContainer>
+                <RegistryText>
+                  {formatRegistryTime(registry?.interval_end) ?? '--'}
+                </RegistryText>
+              </RegistryTextContainer>
+
+              <RegistryTextContainer>
+                <RegistryText>
+                  {formatRegistryTime(registry?.end) ?? '--'}
+                </RegistryText>
+              </RegistryTextContainer>
             </Registry>
-          )}
-          data={fakeRegistries}
-          keyExtractor={item => item.id}
-        />
+          );
+        })}
       </RegistriesContainer>
     </Container>
   );
