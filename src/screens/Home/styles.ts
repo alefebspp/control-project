@@ -1,24 +1,29 @@
 import styled from 'styled-components/native';
 import {CaretLeft} from 'phosphor-react-native';
-import theme from '../../theme';
+import {Clock} from 'phosphor-react-native';
+import {TouchableOpacity} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export const Container = styled.View`
   width: 100%;
   height: 100%;
   background-color: ${({theme}) => theme.COLORS.GRAY_100};
+  gap: 10px;
 `;
 
-export const Header = styled.View`
+export const Header = styled(SafeAreaView)`
   flex-direction: row;
   align-items: center;
   padding: 0 10px;
   width: 100%;
-  height: 10%;
+  height: 12%;
   background-color: ${({theme}) => theme.COLORS.WHITE};
+  justify-content: space-between;
 `;
 
 export const BackButton = styled.TouchableOpacity`
-  flex: 1;
+  width: 40px;
+  height: 40px;
 `;
 
 export const BackIcon = styled(CaretLeft).attrs(({theme}) => ({
@@ -30,3 +35,42 @@ export const Logo = styled.Image`
   width: 50px;
   height: 50px;
 `;
+
+export const RegistriesContainer = styled.View`
+  flex: 1;
+  padding: 10px;
+`;
+
+export const Registry = styled(TouchableOpacity)`
+  width: 100%;
+  height: 40px;
+  background-color: ${({theme}) => theme.COLORS.WHITE};
+  flex-direction: row;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 5px;
+`;
+
+export const RegistryTextContainer = styled.View`
+  width: 20%;
+  height: 100%;
+  justify-content: flex-end;
+`;
+
+export const RegistryText = styled.Text`
+  color: ${({theme}) => theme.COLORS.GRAY_200};
+`;
+
+export const AddRegistryButton = styled(TouchableOpacity)`
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const AddRegistryIcon = styled(Clock).attrs(({theme}) => ({
+  size: 46,
+  color: theme.COLORS.BLUE_300,
+}))``;

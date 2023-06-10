@@ -1,7 +1,7 @@
 export default {
   COLORS: {
     WHITE: '#FFFFFF',
-    GRAY_100: '#999999',
+    GRAY_100: '#d3d3d3',
     GRAY_200: '#777777',
     GRAY_300: '#555555',
     BLUE_100: '#90e0ef',
@@ -11,7 +11,7 @@ export default {
   },
   FONT_FAMILY: {
     REGULAR: 'Roboto-Regular',
-    BOLD: 'Roboto-Regular',
+    BOLD: 'Roboto-Bold',
   },
   FONT_SIZE: {
     SM: 14,
