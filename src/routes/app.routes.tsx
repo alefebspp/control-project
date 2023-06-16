@@ -1,14 +1,18 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Home, Login, CreateEditRegistry} from '../screens';
+import {CreateEditRegistry} from '../screens';
+import {AppTabRoutes} from './app.tab-routes';
 
-export const AppRoutes = () => {
+export const AppStackRoutes = () => {
   const {Navigator, Screen} = createNativeStackNavigator();
 
   return (
     <Navigator screenOptions={{headerShown: false}}>
-      {/* <Screen name="login" component={Login} /> */}
-      <Screen name="home" component={Home} />
-      <Screen name="registry" component={CreateEditRegistry} />
+      <Screen
+        initialParams={{}}
+        name="registry"
+        component={CreateEditRegistry}
+      />
+      <Screen name="feed" component={AppTabRoutes} />
     </Navigator>
   );
 };
