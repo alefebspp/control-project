@@ -24,6 +24,7 @@ import {
 import {useReactQueryHook} from '../../../hooks/useReactQueryHook';
 import {useQueryClient} from '@tanstack/react-query';
 import {RouteProps} from '../../../routes/interface';
+import {useEffect} from 'react';
 
 interface RegistryInputProps {
   registry: RegistryInterface | undefined;
@@ -35,12 +36,12 @@ interface RegistryInputProps {
 }
 
 export const CreateEditRegistry: React.FC = () => {
-  const {navigate} = useNavigation();
+  const {navigate, setParams} = useNavigation();
 
   const {params} = useRoute<RouteProps<'registry'>>();
 
-  const currentDate = params.registryDate
-    ? transformDateToString(params.registryDate)
+  const currentDate = params?.registryDate
+    ? transformDateToString(params?.registryDate)
     : getCurrentDate();
 
   const {useFindCollaboratorRegistries} = useReactQueryHook({});
