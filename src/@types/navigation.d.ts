@@ -4,7 +4,7 @@ export declare global {
       home: undefined;
       login: undefined;
       registry: {
-        registryDate?: string;
+        registryDate?: Date | undefined;
       };
     }
   }
