@@ -6,7 +6,6 @@ import {
   findCollaboratorRegistries,
   updateRegistryRequest,
 } from '../services/RegistriesRequests';
-import {Registry} from '../services/RegistriesRequests/interface';
 
 export const useReactQueryHook = ({queryClient}: UseReactQueryHookProps) => {
   const listRegistries = () => {
@@ -41,7 +40,7 @@ export const useReactQueryHook = ({queryClient}: UseReactQueryHookProps) => {
     date: string | undefined,
   ): any => {
     return useQuery({
-      queryKey: ['registry'],
+      queryKey: ['registry', date],
       queryFn: () => findCollaboratorRegistries({collaboratorId, date}),
     });
   };
