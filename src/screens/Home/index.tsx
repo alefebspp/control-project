@@ -1,17 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Container,
   Header,
-  BackButton,
-  BackIcon,
   RegistriesContainer,
   Registry,
   RegistryText,
   RegistryTextContainer,
-  AddRegistryButton,
-  AddRegistryIcon,
+  TitleContainer,
+  TitleSection,
+  CalendarIcon,
+  Title,
 } from './styles';
-import {formatDateToDayMonth, formatRegistryTime} from '../../utils';
+import {
+  formatDateToDayMonth,
+  formatRegistryTime,
+  getCurrentDate,
+  monthMap,
+} from '../../utils';
 import {useNavigation} from '@react-navigation/native';
 import {useReactQueryHook} from '../../hooks/useReactQueryHook';
 import {Registry as RegistryInterface} from '../../services/RegistriesRequests/interface';
@@ -29,28 +34,40 @@ interface Registry {
 export const Home: React.FC = () => {
   const {listRegistries} = useReactQueryHook({});
 
+  const [titleDescription, setTitleDescription] = useState<string>();
+
   const {data: registries} = listRegistries();
 
-  const {navigate, goBack} = useNavigation<NavigationProps>();
+  const {navigate} = useNavigation<NavigationProps>();
 
-  const handleGoBack = () => {
-    goBack();
+  const getCurrentMonthAndYearDescription = () => {
+    const currentMonthAndYear = getCurrentDate(true);
+
+    const currentMonthAndYearSplited = currentMonthAndYear.split('-');
+
+    const year = currentMonthAndYearSplited[1];
+
+    const month = currentMonthAndYearSplited[0];
+
+    const monthDescription = monthMap[month];
+
+    return `${monthDescription} de ${year}`;
   };
 
-  const handleNavigate = () => {
-    navigate('registry', {});
-  };
+  useEffect(() => {
+    const titleDescription = getCurrentMonthAndYearDescription();
+    setTitleDescription(titleDescription);
+  }, []);
 
   return (
     <Container>
-      <Header>
-        <BackButton onPress={handleGoBack}>
-          <BackIcon />
-        </BackButton>
-        <AddRegistryButton onPress={handleNavigate}>
-          <AddRegistryIcon />
-        </AddRegistryButton>
-      </Header>
+      <Header></Header>
+      <TitleContainer>
+        <TitleSection>
+          <CalendarIcon />
+          <Title>{titleDescription}</Title>
+        </TitleSection>
+      </TitleContainer>
       <RegistriesContainer>
         <Registry>
           <RegistryTextContainer>
