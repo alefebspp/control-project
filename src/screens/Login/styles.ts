@@ -10,7 +10,6 @@ export const Container = styled.View`
 `;
 
 export const LoginForm = styled.View`
-  background-color: ${({theme}) => theme.COLORS.WHITE};
   border-radius: 5px;
   width: 100%;
   height: 60%;
@@ -22,7 +21,7 @@ export const LoginForm = styled.View`
 export const LoginTitle = styled.Text`
   ${({theme}) => css`
     margin: 0 auto;
-    color: ${theme.COLORS.BLUE_200};
+    color: ${theme.COLORS.WHITE};
     font-family: ${theme.FONT_FAMILY.BOLD};
     font-size: ${theme.FONT_SIZE.XL}px;
   `}

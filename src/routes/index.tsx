@@ -1,5 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {AppTabRoutes} from './app.tab-routes';
+import {AppRoutes} from './app.routes';
 import {useTheme} from 'styled-components';
 import {View} from 'react-native';
 
@@ -9,7 +10,7 @@ export const Routes = () => {
   return (
     <View style={{flex: 1, backgroundColor: COLORS.GRAY_100}}>
       <NavigationContainer>
-        <AppTabRoutes />
+        <AppRoutes />
       </NavigationContainer>
     </View>
   );
