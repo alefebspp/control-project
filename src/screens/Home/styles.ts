@@ -1,5 +1,4 @@
 import styled, {css} from 'styled-components/native';
-import {CaretLeft} from 'phosphor-react-native';
 import {Clock, Calendar} from 'phosphor-react-native';
 import {TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -20,16 +19,6 @@ export const Header = styled(SafeAreaView)`
   background-color: ${({theme}) => theme.COLORS.WHITE};
   justify-content: space-between;
 `;
-
-export const BackButton = styled.TouchableOpacity`
-  width: 40px;
-  height: 40px;
-`;
-
-export const BackIcon = styled(CaretLeft).attrs(({theme}) => ({
-  size: 36,
-  color: theme.COLORS.GRAY_300,
-}))``;
 
 export const Logo = styled.Image`
   width: 50px;
