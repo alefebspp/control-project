@@ -24,7 +24,6 @@ import {
 import {useReactQueryHook} from '../../../hooks/useReactQueryHook';
 import {useQueryClient} from '@tanstack/react-query';
 import {RouteProps} from '../../../routes/interface';
-import {useEffect} from 'react';
 
 interface RegistryInputProps {
   registry: RegistryInterface | undefined;
@@ -50,6 +49,7 @@ export const CreateEditRegistry: React.FC = () => {
 
   const handleGoBack = () => {
     navigate('home');
+    setParams({registryDate: undefined});
   };
 
   return (
