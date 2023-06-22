@@ -8,6 +8,7 @@ export default {
     BLUE_200: '#48cae4',
     BLUE_300: '#00b4d8',
     BLUE_400: '#023e8a',
+    ERROR: '#FF0000',
   },
   FONT_FAMILY: {
     REGULAR: 'Roboto-Regular',

@@ -3,13 +3,19 @@ import {ButtonStyleTypes, Container, Title} from './styles';
 
 type Props = TouchableOpacityProps & {
   type?: ButtonStyleTypes;
-  title: string;
+  children: React.ReactNode;
+  isLoading?: boolean;
 };
 
-export const Button = ({type = 'PRIMARY', title, ...rest}: Props) => {
+export const Button = ({
+  type = 'PRIMARY',
+  children,
+  isLoading,
+  ...rest
+}: Props) => {
   return (
-    <Container type={type} {...rest}>
-      <Title>{title}</Title>
+    <Container isLoading={isLoading} type={type} {...rest}>
+      {children}
     </Container>
   );
 };

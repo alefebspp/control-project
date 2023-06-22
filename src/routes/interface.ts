@@ -1,5 +1,5 @@
 import {RouteProp} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 
 type RootStackParamList = {
   home: undefined;
@@ -9,7 +9,7 @@ type RootStackParamList = {
   };
 };
 
-export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
+export type NavigationProps = BottomTabNavigationProp<RootStackParamList>;
 export type RoutesProps = RouteProp<RootStackParamList>;
 export type RouteProps<Route extends keyof RootStackParamList> = RouteProp<
   RootStackParamList,
