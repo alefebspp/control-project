@@ -8,12 +8,22 @@ export const InputContainer = styled(TextInput)`
     color: ${theme.COLORS.WHITE};
     border-bottom-width: 3px;
     border-bottom-color: ${theme.COLORS.GRAY_200};
+    padding: 0;
+    padding-bottom: 3px;
   `}
 `;
 
 export const Container = styled.View`
   flex-direction: column;
 `;
+
+export const ErrorMessageText = styled.Text`
+  ${({theme}) => css`
+    font-size: ${theme.FONT_SIZE.SM}px;
+    color: ${theme.COLORS.ERROR};
+  `}
+`;
+
 export const InputLabel = styled.Text`
   ${({theme}) => css`
     font-size: ${theme.FONT_SIZE.MD}px;
