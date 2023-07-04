@@ -2225,6 +2225,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/datetimepicker@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "@react-native-community/datetimepicker@npm:7.2.0"
+  dependencies:
+    invariant: ^2.2.4
+  checksum: 4ec9de24573d654a2632818de15a1b7c6f41febbaa52aa543e7ef133f507b8b4fe8c0a08a0af34907c283b7be3cb9d5a52db216a2925c8eb96f52bf49a9f2b33
+  languageName: node
+  linkType: hard
+
 "@react-native-community/eslint-config@npm:^3.2.0":
   version: 3.2.0
   resolution: "@react-native-community/eslint-config@npm:3.2.0"
@@ -2819,6 +2828,7 @@ __metadata:
     "@babel/runtime": ^7.20.0
     "@hookform/resolvers": ^3.1.1
     "@react-native-async-storage/async-storage": ^1.18.2
+    "@react-native-community/datetimepicker": ^7.2.0
     "@react-native-community/eslint-config": ^3.2.0
     "@react-native-community/geolocation": ^3.0.6
     "@react-navigation/bottom-tabs": ^6.5.7
@@ -2845,9 +2855,11 @@ __metadata:
     react-hook-form: ^7.44.3
     react-native: 0.71.7
     react-native-dotenv: ^3.4.8
+    react-native-linear-gradient: ^2.7.3
     react-native-modal-datetime-picker: ^15.0.1
     react-native-safe-area-context: 3.3.2
     react-native-screens: ^3.20.0
+    react-native-shimmer-placeholder: ^2.0.9
     react-native-svg: ^13.9.0
     react-native-toast-message: ^2.1.6
     react-test-renderer: 18.2.0
@@ -8672,6 +8684,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-linear-gradient@npm:^2.7.3":
+  version: 2.7.3
+  resolution: "react-native-linear-gradient@npm:2.7.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 3b224e5f0a844e385f9010816e141d0903cd2a7e2c59fef9f67c7ef563ce6acb52b35f9ddaec3c6afb9560492d8513a15e4bf5e9dfc867fc3afb519ed9a9d693
+  languageName: node
+  linkType: hard
+
 "react-native-modal-datetime-picker@npm:^15.0.1":
   version: 15.0.1
   resolution: "react-native-modal-datetime-picker@npm:15.0.1"
@@ -8704,6 +8726,16 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 94ab21378ee82765d329ccb8c92f5ca7cb15df916496fac7ce9a03c45e22579715000dae9c16f0a7d734a8fc1c2d0569fd82ecb71119a0b56046b5ea7533e7c2
+  languageName: node
+  linkType: hard
+
+"react-native-shimmer-placeholder@npm:^2.0.9":
+  version: 2.0.9
+  resolution: "react-native-shimmer-placeholder@npm:2.0.9"
+  peerDependencies:
+    prop-types: ">=15.6.0"
+    react-native-linear-gradient: ">=2.4.0"
+  checksum: 72ef49877c66994acbae7be2e810aef20ced6301b5146c36f671876525d8904e3810af69e277ffe390f05925021f44e3dd16ea04f7e3782ca57610d36d723d54
   languageName: node
   linkType: hard
 
