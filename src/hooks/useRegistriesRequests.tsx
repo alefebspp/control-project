@@ -1,5 +1,5 @@
 import {useQuery, useMutation} from '@tanstack/react-query';
-import {UseReactQueryHookProps} from './interface';
+import {UseRegistriesRequestsProps} from './interface';
 import {
   ListRegistriesRequest,
   createRegistryRequest,
@@ -7,7 +7,9 @@ import {
   updateRegistryRequest,
 } from '../services/RegistriesRequests';
 
-export const useReactQueryHook = ({queryClient}: UseReactQueryHookProps) => {
+export const useRegistriesRequests = ({
+  queryClient,
+}: UseRegistriesRequestsProps) => {
   const listRegistries = () => {
     return useQuery({
       queryKey: ['registries'],
@@ -38,7 +40,7 @@ export const useReactQueryHook = ({queryClient}: UseReactQueryHookProps) => {
   const useFindCollaboratorRegistries = (
     collaboratorId: string | undefined,
     date: string | undefined,
-  ): any => {
+  ) => {
     return useQuery({
       queryKey: ['registry', date],
       queryFn: () => findCollaboratorRegistries({collaboratorId, date}),

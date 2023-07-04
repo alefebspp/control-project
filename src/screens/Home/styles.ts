@@ -6,18 +6,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 export const Container = styled.View`
   width: 100%;
   height: 100%;
-  background-color: ${({theme}) => theme.COLORS.GRAY_100};
-  gap: 5px;
+  background-color: ${({theme}) => theme.COLORS.GRAY_50};
 `;
 
-export const Header = styled(SafeAreaView)`
-  flex-direction: row;
-  align-items: center;
-  padding: 0 10px;
+export const PageContainer = styled.View`
   width: 100%;
-  height: 12%;
-  background-color: ${({theme}) => theme.COLORS.WHITE};
-  justify-content: space-between;
+  height: 100%;
+  gap: 5px;
 `;
 
 export const Logo = styled.Image`
@@ -34,6 +29,7 @@ export const Registry = styled(TouchableOpacity)`
   width: 100%;
   height: 40px;
   background-color: ${({theme}) => theme.COLORS.WHITE};
+  border: 1px solid ${({theme}) => theme.COLORS.GRAY_100};
   flex-direction: row;
   margin-bottom: 10px;
   justify-content: space-between;
@@ -77,15 +73,28 @@ export const RegistryText = styled.Text`
 `;
 
 export const AddRegistryButton = styled(TouchableOpacity)`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
   justify-content: center;
   align-items: center;
+  background-color: ${({theme}) => theme.COLORS.BLUE_400};
+  margin: 0 10px 5px 0;
+`;
+
+export const Header = styled(SafeAreaView)`
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 12%;
+  background-color: ${({theme}) => theme.COLORS.WHITE};
+  justify-content: flex-end;
+  align-items: flex-end;
 `;
 
 export const AddRegistryIcon = styled(Clock).attrs(({theme}) => ({
-  size: 46,
-  color: theme.COLORS.BLUE_300,
+  size: 36,
+  color: theme.COLORS.WHITE,
 }))``;
 
 export const CalendarIcon = styled(Calendar).attrs(({theme}) => ({

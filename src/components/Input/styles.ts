@@ -3,13 +3,12 @@ import {TextInput} from 'react-native';
 
 export const InputContainer = styled(TextInput)`
   ${({theme}) => css`
-    min-height: 56px;
+    /* min-height: 56px; */
     min-width: 56px;
-    color: ${theme.COLORS.WHITE};
-    border-bottom-width: 3px;
-    border-bottom-color: ${theme.COLORS.GRAY_200};
-    padding: 0;
-    padding-bottom: 3px;
+    color: ${theme.COLORS.GRAY_200};
+    border: 3px solid ${theme.COLORS.GRAY_200};
+    padding: 10px 10px 10px 10px;
+    border-radius: 10px;
   `}
 `;
 
@@ -27,6 +26,6 @@ export const ErrorMessageText = styled.Text`
 export const InputLabel = styled.Text`
   ${({theme}) => css`
     font-size: ${theme.FONT_SIZE.MD}px;
-    color: ${theme.COLORS.WHITE};
+    color: ${theme.COLORS.GRAY_200};
   `}
 `;

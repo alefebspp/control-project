@@ -1,5 +1,8 @@
 import {QueryClient} from '@tanstack/react-query';
 
-export interface UseReactQueryHookProps {
+export interface UseRegistriesRequestsProps {
+  queryClient?: QueryClient;
+}
+export interface UseAdjustmentsRequestsProps {
   queryClient?: QueryClient;
 }

@@ -23,7 +23,7 @@ export const Clock = ({registryDate}: ClockProps) => {
   const getFormatedDate = () => {
     const date = registryDate ? formatedRegistryDate : currentDate;
 
-    const dia = date!.getUTCDate();
+    const dia = registryDate ? date!.getUTCDate() : date!.getDate();
     const mes = date!.getUTCMonth() + 1;
     const ano = date!.getUTCFullYear();
 

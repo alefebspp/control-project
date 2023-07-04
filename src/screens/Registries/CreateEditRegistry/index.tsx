@@ -1,4 +1,6 @@
+import {useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 import {
   Container,
   Header,
@@ -11,31 +13,23 @@ import {
   DateText,
   Registry,
   ActionsContainer,
-  DeleteIcon,
+  UpdateIcon,
 } from './styles';
-import DatePicker from '../../../components/DatePicker';
-import {Clock} from '../../../components/Clock';
-import {Registry as RegistryInterface} from '../../../services/RegistriesRequests/interface';
+import {ModalDatePicker, Clock} from '../../../components';
 import {
   getCurrentDate,
   formatRegistryTime,
   transformDateToString,
 } from '../../../utils';
-import {useReactQueryHook} from '../../../hooks/useReactQueryHook';
-import {useQueryClient} from '@tanstack/react-query';
-import {RouteProps} from '../../../routes/interface';
-
-interface RegistryInputProps {
-  registry: RegistryInterface | undefined;
-  label: string;
-  registryType: keyof Pick<
-    RegistryInterface,
-    'start' | 'end' | 'interval_start' | 'interval_end'
-  >;
-}
+import {useRegistriesRequests} from '../../../hooks/useRegistriesRequests';
+import {useAuthContext} from '../../../hooks/useAuth';
+import {RouteProps, RegistryInputProps} from './interface';
+import {findAdjustmentByRegistryIdRequest} from '../../../services/AdjustmentsRequests';
 
 export const CreateEditRegistry: React.FC = () => {
-  const {navigate, setParams} = useNavigation();
+  const {navigate} = useNavigation();
+
+  const {user} = useAuthContext();
 
   const {params} = useRoute<RouteProps<'registry'>>();
 
@@ -43,13 +37,15 @@ export const CreateEditRegistry: React.FC = () => {
     ? transformDateToString(params?.registryDate)
     : getCurrentDate();
 
-  const {useFindCollaboratorRegistries} = useReactQueryHook({});
+  const {useFindCollaboratorRegistries} = useRegistriesRequests({});
 
-  const {data: registry} = useFindCollaboratorRegistries('test', currentDate);
+  const {data: registry} = useFindCollaboratorRegistries(
+    user?.user_id,
+    currentDate,
+  );
 
   const handleGoBack = () => {
     navigate('home');
-    setParams({registryDate: undefined});
   };
 
   return (
@@ -60,46 +56,61 @@ export const CreateEditRegistry: React.FC = () => {
         </IconButton>
       </Header>
       <ContentContainer>
-        <Clock registryDate={registry?.date} />
+        <Clock registryDate={registry ? registry[0]?.date : undefined} />
         <RegistryInput
           registryType="start"
-          registry={registry}
+          registry={registry ? registry[0] : undefined}
           label="Entrada"
         />
         <RegistryInput
           registryType="interval_start"
-          registry={registry}
+          registry={registry ? registry[0] : undefined}
           label="Início intervalo"
         />
         <RegistryInput
           registryType="interval_end"
-          registry={registry}
+          registry={registry ? registry[0] : undefined}
           label="Fim intervalo"
         />
-        <RegistryInput registryType="end" registry={registry} label="Saída" />
+        <RegistryInput
+          registryType="end"
+          registry={registry ? registry[0] : undefined}
+          label="Saída"
+        />
       </ContentContainer>
     </Container>
   );
 };
 
 const RegistryInput = ({registry, label, registryType}: RegistryInputProps) => {
-  const queryClient = useQueryClient();
+  const registryTypeAlreadyExists = registry?.[registryType];
 
-  const {useUpdateRegistryMutation} = useReactQueryHook({queryClient});
+  const [adjustmentExists, setAdjustmentExists] = useState<
+    boolean | undefined
+  >();
 
-  const {mutateAsync: updateRegistry} = useUpdateRegistryMutation();
+  const checkIfAdjustmentExists = async () => {
+    const adjustmentExists = await findAdjustmentByRegistryIdRequest({
+      registryId: registry?.id,
+      registryType,
+    });
 
-  const handleEraseRegistry = async (type: string, newValue: null) => {
-    if (registry || registry == null) {
-      await updateRegistry({
-        registryId: registry?.id,
-        registryData: {
-          [type]: newValue,
-          [`${type}_location`]: newValue,
-        },
-      });
-    }
+    setAdjustmentExists(adjustmentExists);
   };
+
+  console.log(adjustmentExists);
+
+  const showAdjustmentExistsToast = () => {
+    Toast.show({
+      type: 'info',
+      text1: 'Registro Pendente',
+      text2: 'Já foi requisitado um ajuste para esse registro',
+    });
+  };
+
+  useEffect(() => {
+    checkIfAdjustmentExists();
+  }, [registry, registryType]);
 
   return (
     <InputContainer>
@@ -107,24 +118,22 @@ const RegistryInput = ({registry, label, registryType}: RegistryInputProps) => {
         <Registry>
           <RegistryTypeLabel>{label}</RegistryTypeLabel>
           <DateText>
-            {registry?.[registryType]
+            {registryTypeAlreadyExists
               ? formatRegistryTime(registry[registryType]?.toString())
               : '--'}
           </DateText>
         </Registry>
       </RegistryContainer>
-      {registry?.[registryType] ? (
+      {adjustmentExists ? (
+        <IconButton onPress={showAdjustmentExistsToast} width={50} height={50}>
+          <UpdateIcon />
+        </IconButton>
+      ) : registryTypeAlreadyExists ? (
         <ActionsContainer>
-          <IconButton
-            onPress={() => handleEraseRegistry(registryType, null)}
-            width={50}
-            height={50}>
-            <DeleteIcon />
-          </IconButton>
-          <DatePicker registry={registry} registryType={registryType} />
+          <ModalDatePicker registry={registry} registryType={registryType} />
         </ActionsContainer>
       ) : (
-        <DatePicker registry={registry} registryType={registryType} />
+        <ModalDatePicker registry={registry} registryType={registryType} />
       )}
     </InputContainer>
   );
