@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components/native';
-import {CaretLeft, X, NotePencil} from 'phosphor-react-native';
+import {CaretLeft, X, ClockClockwise} from 'phosphor-react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 export interface IconButtonProps {
@@ -9,7 +9,7 @@ export interface IconButtonProps {
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({theme}) => theme.COLORS.GRAY_100};
+  background-color: ${({theme}) => theme.COLORS.GRAY_50};
   gap: 10px;
 `;
 
@@ -86,6 +86,11 @@ export const ActionsContainer = styled.View`
   flex-direction: row;
   gap: 10px;
 `;
+
+export const UpdateIcon = styled(ClockClockwise).attrs(({theme}) => ({
+  size: 36,
+  color: theme.COLORS.PENDING,
+}))``;
 
 export const BackIcon = styled(CaretLeft).attrs(({theme}) => ({
   size: 36,

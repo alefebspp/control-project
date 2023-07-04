@@ -1,11 +1,6 @@
-import {Registry} from '../../services/RegistriesRequests/interface';
-
-export interface SelectedTime {
-  time: string | undefined;
-  location: string | undefined;
-}
+import {Dispatch, SetStateAction} from 'react';
 
 export interface DatePickerProps {
-  registry?: Registry | undefined;
-  registryType: keyof Registry;
+  setHourAndMinutes: Dispatch<SetStateAction<string | undefined>>;
+  hourAndMinutes: string | undefined;
 }

@@ -10,9 +10,15 @@ import {useTheme} from 'styled-components/native';
 interface InputProps extends TextInputProps {
   label: string;
   errorMessage?: string;
+  isTextArea?: boolean;
 }
 
-export const Input = ({label, errorMessage, ...props}: InputProps) => {
+export const Input = ({
+  label,
+  errorMessage,
+  isTextArea,
+  ...props
+}: InputProps) => {
   const {COLORS} = useTheme();
 
   return (
@@ -21,7 +27,7 @@ export const Input = ({label, errorMessage, ...props}: InputProps) => {
       <InputContainer
         {...props}
         placeholderTextColor={COLORS.GRAY_100}
-        textAlignVertical="bottom"
+        textAlignVertical={isTextArea ? 'top' : 'center'}
       />
       <ErrorMessageText>{errorMessage}</ErrorMessageText>
     </Container>

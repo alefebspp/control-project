@@ -4,7 +4,7 @@ import {SignOut, UserCircle} from 'phosphor-react-native';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({theme}) => theme.COLORS.GRAY_100};
+  background-color: ${({theme}) => theme.COLORS.GRAY_50};
   gap: 10px;
 `;
 

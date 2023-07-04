@@ -8,10 +8,10 @@ interface FindCollaboratorRegistriesProps {
 
 export const findCollaboratorRegistries = async (
   params: FindCollaboratorRegistriesProps,
-): Promise<Registry | Registry[]> => {
+): Promise<Registry[]> => {
   const {data} = await api.get(
     `/registry/${params.collaboratorId}${
-      params.date ? `?date=${params.date}` : null
+      params.date ? `?date=${params.date}` : ''
     }`,
   );
 
