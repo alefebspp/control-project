@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Login} from '../screens';
 
-export const AppRoutes = () => {
+export const AuthRoutes = () => {
   const {Navigator, Screen} = createNativeStackNavigator();
 
   return (

@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTheme} from 'styled-components';
-import {Clock, HouseLine, GearSix} from 'phosphor-react-native';
-import {Home, CreateEditRegistry, User} from '../screens';
+import {HouseLine, GearSix, ClockClockwise} from 'phosphor-react-native';
+import {Home, User, Adjustments} from '../screens';
 import {useAuthContext} from '../hooks/useAuth';
 import {Loading} from '../components/Loading';
 
@@ -19,7 +19,7 @@ export const AppTabRoutes = () => {
   return (
     <Navigator screenOptions={{headerShown: false}}>
       <Screen
-        name="home"
+        name="registries"
         component={Home}
         options={{
           tabBarActiveTintColor: COLORS.BLUE_300,
@@ -35,21 +35,19 @@ export const AppTabRoutes = () => {
         }}
       />
       <Screen
-        name="registry"
-        component={CreateEditRegistry}
-        options={({navigation, route}) => {
-          return {
-            tabBarActiveTintColor: COLORS.BLUE_300,
-            tabBarInactiveTintColor: COLORS.GRAY_200,
-            tabBarIcon: ({focused}) => (
-              <Clock
-                size={36}
-                color={focused ? COLORS.BLUE_300 : COLORS.GRAY_200}
-                weight={focused ? 'fill' : 'regular'}
-              />
-            ),
-            tabBarLabel: 'Registro',
-          };
+        name="adjustments"
+        component={Adjustments}
+        options={{
+          tabBarActiveTintColor: COLORS.BLUE_300,
+          tabBarInactiveTintColor: COLORS.GRAY_200,
+          tabBarIcon: ({focused}) => (
+            <ClockClockwise
+              size={36}
+              color={focused ? COLORS.BLUE_300 : COLORS.GRAY_200}
+              weight={focused ? 'fill' : 'regular'}
+            />
+          ),
+          tabBarLabel: 'Ajustes',
         }}
       />
       <Screen
