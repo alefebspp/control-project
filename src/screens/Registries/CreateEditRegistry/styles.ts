@@ -72,9 +72,9 @@ export const DateText = styled.Text`
 
 export const RegistryTypeLabel = styled.Text`
   ${({theme}) => css`
-    color: ${theme.COLORS.GRAY_200};
+    color: ${theme.COLORS.GRAY_300};
     font-size: ${theme.FONT_SIZE.MD}px;
-    font-weight: 700;
+    font-weight: 500;
   `}
 `;
 
