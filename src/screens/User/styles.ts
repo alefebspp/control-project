@@ -2,6 +2,22 @@ import styled, {css} from 'styled-components/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SignOut, UserCircle} from 'phosphor-react-native';
 
+interface UserInfosContentProps {
+  height?: number;
+  backgroundColor?: string;
+  justifyContent?: string;
+}
+
+interface UserShiftContainerProps {
+  width?: number;
+  justifyContent?: string;
+}
+
+interface UserInfoTextProps {
+  weight?: number;
+  color?: string;
+}
+
 export const Container = styled.View`
   flex: 1;
   background-color: ${({theme}) => theme.COLORS.GRAY_50};
@@ -31,18 +47,33 @@ export const UserInfosContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
   align-items: center;
-`;
-
-export const UserInfosContent = styled.View`
-  width: 80%;
-  flex-direction: row;
-  justify-content: center;
   gap: 5px;
 `;
 
-export const UserInfoText = styled.Text`
-  ${({theme}) => css`
-    color: ${theme.COLORS.GRAY_200};
+export const UserInfosContent = styled.View<UserInfosContentProps>`
+  ${({height, backgroundColor, justifyContent}) => css`
+    width: 100%;
+    height: ${height ? `${height}%` : 'auto'};
+    background-color: ${backgroundColor ? backgroundColor : ''};
+    flex-direction: row;
+    justify-content: ${justifyContent ? justifyContent : 'center'};
+    gap: 5px;
+  `}
+`;
+
+export const UserShiftContainer = styled.View<UserShiftContainerProps>`
+  ${({width, justifyContent}) => css`
+    width: ${width ? `${width}%` : '100%'};
+    flex-direction: row;
+    justify-content: ${justifyContent ? justifyContent : 'space-between'};
+    background-color: white;
+  `}
+`;
+
+export const UserInfoText = styled.Text<UserInfoTextProps>`
+  ${({theme, color, weight}) => css`
+    color: ${color ? color : theme.COLORS.GRAY_200};
+    font-weight: ${weight ? weight : 300};
     font-size: ${theme.FONT_SIZE.MD}px;
   `}
 `;
