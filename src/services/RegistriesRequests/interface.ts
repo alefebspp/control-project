@@ -11,3 +11,8 @@ export interface Registry {
   collaborator_id?: string;
   id: string;
 }
+
+export interface Statistics {
+  aditionalTotalHours: string;
+  pendingTotalHours: string;
+}
