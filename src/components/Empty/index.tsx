@@ -4,7 +4,7 @@ export const Empty = () => {
   return (
     <Container>
       <EmptyIcon />
-      <EmptyText>There are no registries...</EmptyText>
+      <EmptyText>Não existem registros.</EmptyText>
     </Container>
   );
 };
