@@ -41,10 +41,13 @@ export const useAdjustmentsRequests = ({
     });
   };
 
-  const useListAdjustmentsRequest = () => {
+  const useListAdjustmentsRequest = (
+    collaborator_id?: string,
+    period?: string,
+  ) => {
     return useQuery({
-      queryFn: listAdjustmentsRequest,
-      queryKey: ['adjustments'],
+      queryFn: () => listAdjustmentsRequest(collaborator_id, period),
+      queryKey: ['adjustments', period],
     });
   };
 

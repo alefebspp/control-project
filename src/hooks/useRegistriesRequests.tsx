@@ -5,6 +5,7 @@ import {
   createRegistryRequest,
   findCollaboratorRegistries,
   updateRegistryRequest,
+  calculateRegistriesHours,
 } from '../services/RegistriesRequests';
 
 export const useRegistriesRequests = ({
@@ -38,12 +39,23 @@ export const useRegistriesRequests = ({
   };
 
   const useFindCollaboratorRegistries = (
-    collaboratorId: string | undefined,
-    date: string | undefined,
+    collaboratorId?: string,
+    date?: string,
+    period?: string,
   ) => {
     return useQuery({
-      queryKey: ['registry', date],
-      queryFn: () => findCollaboratorRegistries({collaboratorId, date}),
+      queryKey: ['registry', date, period],
+      queryFn: () => findCollaboratorRegistries({collaboratorId, date, period}),
+    });
+  };
+
+  const useCalculateRegistriesHours = (
+    period?: string,
+    collaborator_id?: string,
+  ) => {
+    return useQuery({
+      queryKey: ['statistic', period],
+      queryFn: () => calculateRegistriesHours(period, collaborator_id),
     });
   };
 
@@ -52,5 +64,6 @@ export const useRegistriesRequests = ({
     useCreateRegistryMutation,
     useUpdateRegistryMutation,
     useFindCollaboratorRegistries,
+    useCalculateRegistriesHours,
   };
 };

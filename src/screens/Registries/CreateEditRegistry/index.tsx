@@ -25,6 +25,7 @@ import {useRegistriesRequests} from '../../../hooks/useRegistriesRequests';
 import {useAuthContext} from '../../../hooks/useAuth';
 import {RouteProps, RegistryInputProps} from './interface';
 import {findAdjustmentByRegistryIdRequest} from '../../../services/AdjustmentsRequests';
+import {RegistryShimmer} from './shimmer';
 
 export const CreateEditRegistry: React.FC = () => {
   const {navigate} = useNavigation();
@@ -39,7 +40,7 @@ export const CreateEditRegistry: React.FC = () => {
 
   const {useFindCollaboratorRegistries} = useRegistriesRequests({});
 
-  const {data: registry} = useFindCollaboratorRegistries(
+  const {data: registry, isLoading} = useFindCollaboratorRegistries(
     user?.user_id,
     currentDate,
   );
@@ -55,29 +56,34 @@ export const CreateEditRegistry: React.FC = () => {
           <BackIcon />
         </IconButton>
       </Header>
-      <ContentContainer>
-        <Clock registryDate={registry ? registry[0]?.date : undefined} />
-        <RegistryInput
-          registryType="start"
-          registry={registry ? registry[0] : undefined}
-          label="Entrada"
-        />
-        <RegistryInput
-          registryType="interval_start"
-          registry={registry ? registry[0] : undefined}
-          label="Início intervalo"
-        />
-        <RegistryInput
-          registryType="interval_end"
-          registry={registry ? registry[0] : undefined}
-          label="Fim intervalo"
-        />
-        <RegistryInput
-          registryType="end"
-          registry={registry ? registry[0] : undefined}
-          label="Saída"
-        />
-      </ContentContainer>
+
+      {isLoading ? (
+        <RegistryShimmer />
+      ) : (
+        <ContentContainer>
+          <Clock registryDate={registry ? registry[0]?.date : undefined} />
+          <RegistryInput
+            registryType="start"
+            registry={registry ? registry[0] : undefined}
+            label="Entrada"
+          />
+          <RegistryInput
+            registryType="interval_start"
+            registry={registry ? registry[0] : undefined}
+            label="Início intervalo"
+          />
+          <RegistryInput
+            registryType="interval_end"
+            registry={registry ? registry[0] : undefined}
+            label="Fim intervalo"
+          />
+          <RegistryInput
+            registryType="end"
+            registry={registry ? registry[0] : undefined}
+            label="Saída"
+          />
+        </ContentContainer>
+      )}
     </Container>
   );
 };
@@ -97,8 +103,6 @@ const RegistryInput = ({registry, label, registryType}: RegistryInputProps) => {
 
     setAdjustmentExists(adjustmentExists);
   };
-
-  console.log(adjustmentExists);
 
   const showAdjustmentExistsToast = () => {
     Toast.show({

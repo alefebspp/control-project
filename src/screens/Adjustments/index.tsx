@@ -1,49 +1,37 @@
 import {ScrollView} from 'react-native';
-import {Adjustment} from '../../components';
+import {Adjustment, Select} from '../../components';
 import {useAdjustmentsRequests} from '../../hooks/useAdjustmentsRequests';
-import {
-  AdjustmentsContainer,
-  CalendarIcon,
-  Header,
-  PageContainer,
-  Title,
-  TitleContainer,
-  TitleSection,
-} from './styles';
+import {AdjustmentsContainer, Header, PageContainer} from './styles';
 import {Adjustment as AdjustmentInterface} from '../../services/AdjustmentsRequests/interface';
-import {getCurrentDate, monthMap} from '../../utils';
+import {getCurrentMonthAndYearDescription} from '../../utils';
 import {AdjustmentsShimmer} from './shimmer';
+import {useAuthContext} from '../../hooks/useAuth';
+import {useState} from 'react';
 
 export const Adjustments = () => {
+  const currentDate = new Date();
+
+  const [period, setPeriod] = useState<string | undefined>(
+    `${currentDate.getFullYear()}-0${currentDate.getMonth() + 1}-01`,
+  );
+  const {user} = useAuthContext();
+
   const {useListAdjustmentsRequest} = useAdjustmentsRequests({});
 
-  const {data: adjustments, isLoading} = useListAdjustmentsRequest();
-
-  const getCurrentMonthAndYearDescription = () => {
-    const currentMonthAndYear = getCurrentDate(true);
-
-    const currentMonthAndYearSplited = currentMonthAndYear.split('-');
-
-    const year = currentMonthAndYearSplited[1];
-
-    const month = currentMonthAndYearSplited[0];
-
-    const monthDescription = monthMap[month];
-
-    return `${monthDescription} de ${year}`;
-  };
+  const {data: adjustments, isLoading} = useListAdjustmentsRequest(
+    user?.user_id,
+    period,
+  );
 
   const currentMonthAndYearDescription = getCurrentMonthAndYearDescription();
 
   return (
     <PageContainer>
       <Header></Header>
-      <TitleContainer>
-        <TitleSection>
-          <CalendarIcon />
-          <Title>{currentMonthAndYearDescription}</Title>
-        </TitleSection>
-      </TitleContainer>
+      <Select
+        setPeriod={setPeriod}
+        currentMonthDescription={currentMonthAndYearDescription}
+      />
       <AdjustmentsContainer>
         <ScrollView showsHorizontalScrollIndicator={false}>
           {isLoading ? (

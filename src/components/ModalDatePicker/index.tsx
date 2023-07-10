@@ -13,6 +13,7 @@ import {
   getCurrentDate,
   requestSchema,
   checkIfCurrentDateEqualsRegistryDate,
+  convertRegistryType,
 } from '../../utils';
 import {
   ButtonsContainer,
@@ -255,7 +256,7 @@ const CreateAdjustment = ({
   };
 
   return (
-    <ModalContent height={80}>
+    <ModalContent height={100}>
       <LocationContainer height={20}>
         <LocationIcon />
         {isLoading ? (
@@ -265,7 +266,9 @@ const CreateAdjustment = ({
         )}
       </LocationContainer>
       <RequestContainer>
-        <RequestTitle>Solicitar ajuste de horário</RequestTitle>
+        <RequestTitle>{`Solicitar ajuste em ${convertRegistryType(
+          registryType,
+        )?.toLocaleLowerCase()}`}</RequestTitle>
         <Controller
           name="reason"
           control={control}

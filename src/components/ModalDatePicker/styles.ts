@@ -17,8 +17,7 @@ interface ActionButtonProps {
 export const ModalContainer = styled.View`
   width: 100%;
   height: 100%;
-  padding: 20px;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 `;
 
@@ -41,6 +40,7 @@ export const LocationContainer = styled.View<ContainerContentProps>`
   background-color: ${({theme}) => theme.COLORS.GRAY_200};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  padding: 0 10px 10px 10px;
 `;
 
 export const RequestContainer = styled.View`
@@ -90,7 +90,7 @@ export const TimeText = styled.Text`
 export const RequestTitle = styled.Text`
   font-size: ${({theme}) => theme.FONT_SIZE.LG}px;
   color: ${({theme}) => theme.COLORS.PENDING};
-  font-weight: 700;
+  font-weight: 500;
   margin: 0 auto;
 `;
 

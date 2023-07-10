@@ -142,22 +142,41 @@ export const Adjustment = ({adjustment}: AdjustmentProps) => {
         </Detail>
         <Detail>
           <DetailLabel>
+            Local anterior:
+            {
+              <DetailLabel weight={400}>{` ${
+                adjustment.registry_location
+                  ? adjustment.registry_location
+                  : ' --'
+              }`}</DetailLabel>
+            }
+          </DetailLabel>
+        </Detail>
+        <Detail>
+          <DetailLabel>
+            Novo local:
+            {
+              <DetailLabel
+                weight={400}>{` ${adjustment.new_location}`}</DetailLabel>
+            }
+          </DetailLabel>
+        </Detail>
+        <Detail>
+          <DetailLabel>
             Motivo:
             {<DetailLabel weight={400}>{` ${adjustment.reason}`}</DetailLabel>}
           </DetailLabel>
         </Detail>
         {adjustment.status == 'REJECTED' || adjustment.status == 'ACCEPTED' ? (
-          <ResponseContainer>
-            <Detail>
-              <DetailLabel>Revisado por:</DetailLabel>
-              <DetailLabel weight={400}>
-                {` ${adjustment.request_reviewer?.name} ${adjustment.request_reviewer?.surname}`}
-              </DetailLabel>
-            </Detail>
-          </ResponseContainer>
+          <Detail>
+            <DetailLabel>Revisado por:</DetailLabel>
+            <DetailLabel weight={400}>
+              {` ${adjustment.request_reviewer?.name} ${adjustment.request_reviewer?.surname}`}
+            </DetailLabel>
+          </Detail>
         ) : (
           <ResponseContainer color={COLORS.WHITE}>
-            <DetailLabel size={FONT_SIZE.MD}>Avaliar requisição</DetailLabel>
+            <DetailLabel>Avalie a requisição</DetailLabel>
             <ResponseContainer color={COLORS.WHITE} rowDirection={true}>
               <ValidateButtonContainer>
                 <ValidateButton
