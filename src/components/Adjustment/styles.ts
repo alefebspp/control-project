@@ -32,7 +32,8 @@ export const StatusContainer = styled.TouchableOpacity`
 `;
 
 export const ResponseContainer = styled.View<StatusProps>`
-  flex: 1;
+  width: 100%;
+  height: 100px;
   background-color: ${({theme, color}) =>
     color ? color : theme.COLORS.GRAY_50};
   flex-direction: ${({rowDirection}) => (rowDirection ? 'row' : 'column')};
@@ -41,7 +42,7 @@ export const ResponseContainer = styled.View<StatusProps>`
 export const DetailsContainer = styled.View`
   ${({theme}) => css`
     width: 100%;
-    height: ${0.4 * windowHeight}px;
+    height: ${0.5 * windowHeight}px;
     background-color: ${theme.COLORS.WHITE};
     margin-bottom: 10px;
   `}
@@ -121,8 +122,8 @@ export const ValidateButtonContainer = styled.View`
 `;
 
 export const ValidateButton = styled(TouchableOpacity)<StatusProps>`
-  width: 20%;
-  height: 40%;
+  width: 50px;
+  height: 40px;
   justify-content: center;
   align-items: center;
   background-color: ${({color}) => color};

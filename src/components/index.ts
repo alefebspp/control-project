@@ -5,3 +5,4 @@ export {Input} from './Input';
 export {Header} from './Header';
 export {Empty} from './Empty';
 export {Adjustment} from './Adjustment';
+export {Select} from './Select';

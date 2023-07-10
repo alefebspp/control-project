@@ -1,7 +1,39 @@
 import styled, {css} from 'styled-components/native';
-import {Clock, Calendar} from 'phosphor-react-native';
-import {TouchableOpacity} from 'react-native';
+import {
+  Clock,
+  Calendar,
+  ChartLineUp,
+  TrendUp,
+  TrendDown,
+} from 'phosphor-react-native';
+import {Dimensions, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+
+interface MonthStatisticContainerProps {
+  isOpen?: boolean;
+}
+
+interface StatisticContainerProps {
+  width?: number;
+  height?: number;
+  flexDirection?: string;
+}
+
+interface TitleContainerProps {
+  borderBottonWidth?: number;
+  backgroundColor?: string;
+  width?: number;
+  height?: number;
+  borderRadius?: number;
+}
+
+interface TitleProps {
+  weight?: number;
+  size?: number;
+  color?: string;
+}
+
+const windowWidth = Dimensions.get('screen').width;
 
 export const Container = styled.View`
   width: 100%;
@@ -10,8 +42,7 @@ export const Container = styled.View`
 `;
 
 export const PageContainer = styled.View`
-  width: 100%;
-  height: 100%;
+  flex: 1;
   gap: 5px;
 `;
 
@@ -38,30 +69,6 @@ export const Registry = styled(TouchableOpacity)`
   border-radius: 5px;
 `;
 
-export const TitleContainer = styled.View`
-  width: 100%;
-  height: 10%;
-  padding: 10px 10px 0 10px;
-`;
-
-export const TitleSection = styled.View`
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  background-color: ${({theme}) => theme.COLORS.BLUE_300};
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-`;
-
-export const Title = styled.Text`
-  ${({theme}) => css`
-    color: ${theme.COLORS.WHITE};
-    font-size: ${theme.FONT_SIZE.LG}px;
-    font-weight: 700;
-  `}
-`;
-
 export const RegistryTextContainer = styled.View`
   width: 20%;
   height: 100%;
@@ -73,12 +80,12 @@ export const RegistryText = styled.Text`
 `;
 
 export const AddRegistryButton = styled(TouchableOpacity)`
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
   justify-content: center;
   align-items: center;
-  background-color: ${({theme}) => theme.COLORS.BLUE_400};
+  background-color: ${({theme}) => theme.COLORS.GRAY_300};
   margin: 0 10px 5px 0;
 `;
 
@@ -92,9 +99,91 @@ export const Header = styled(SafeAreaView)`
   align-items: flex-end;
 `;
 
+export const MonthStatisticContainer = styled(
+  TouchableOpacity,
+)<MonthStatisticContainerProps>`
+  ${({theme, isOpen}) => css`
+    position: absolute;
+    width: ${isOpen ? `${windowWidth - 20}px` : '40px'};
+    border-radius: 10px;
+    height: ${isOpen ? '25%' : '40px'};
+    background-color: ${theme.COLORS.GRAY_300};
+    bottom: 0;
+    right: 0;
+    margin: 0 10px 10px 10px;
+  `}
+`;
+
+export const MonthStatisticsSection = styled.View`
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+export const StatisticContainer = styled.View<StatisticContainerProps>`
+  ${({theme, width, height, flexDirection}) => css`
+    width: ${width ? `${width}%` : '100%'};
+    height: ${height ? `${height}%` : '70%'};
+    flex-direction: ${flexDirection ? flexDirection : 'row'};
+    align-items: center;
+    justify-content: flex-start;
+  `}
+`;
+
+export const TitleContainer = styled.View<TitleContainerProps>`
+  ${({
+    theme,
+    borderBottonWidth,
+    backgroundColor,
+    width,
+    height,
+    borderRadius,
+  }) => css`
+    width: ${width ? `${width}%` : '100%'};
+    height: ${height ? `${height}%` : '30%'};
+    ${borderBottonWidth && `border-bottom-width: ${borderBottonWidth}px`}
+    border-color: ${theme.COLORS.GRAY_50};
+    justify-content: center;
+    align-items: center;
+    background-color: ${backgroundColor ? backgroundColor : ''};
+    flex-direction: row;
+    gap: 10px;
+    border-radius: ${borderRadius ? `${borderRadius}px` : '0'};
+  `}
+`;
+
+export const Title = styled.Text<TitleProps>`
+  ${({theme, weight, size, color}) => css`
+    color: ${color ? color : theme.COLORS.WHITE};
+    font-size: ${size ? size : theme.FONT_SIZE.LG}px;
+    font-weight: ${weight ? weight : 500};
+  `}
+`;
+
 export const AddRegistryIcon = styled(Clock).attrs(({theme}) => ({
   size: 36,
   color: theme.COLORS.WHITE,
+  weight: 'fill',
+}))``;
+
+export const StatisticIcon = styled(ChartLineUp).attrs(({theme, color}) => ({
+  size: 26,
+  color: color ? color : theme.COLORS.WHITE,
+}))`
+  margin: auto;
+`;
+
+export const UpChart = styled(TrendUp).attrs(({theme}) => ({
+  size: 20,
+  color: theme.COLORS.ACCEPTED,
+}))``;
+
+export const DownChart = styled(TrendDown).attrs(({theme}) => ({
+  size: 20,
+  color: theme.COLORS.ERROR,
 }))``;
 
 export const CalendarIcon = styled(Calendar).attrs(({theme}) => ({
