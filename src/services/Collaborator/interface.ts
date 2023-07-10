@@ -4,6 +4,8 @@ export interface Collaborator {
   surname: string;
   email: string;
   password: string;
-  shift_start: Date;
-  shift_end: Date;
+  shift_start: string;
+  shift_end: string;
+  interval_start: string;
+  interval_end: string;
 }
