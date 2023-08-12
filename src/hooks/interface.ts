@@ -6,3 +6,7 @@ export interface UseRegistriesRequestsProps {
 export interface UseAdjustmentsRequestsProps {
   queryClient?: QueryClient;
 }
+
+export interface UseCollaboratorsRequestsProps {
+  queryClient?: QueryClient;
+}

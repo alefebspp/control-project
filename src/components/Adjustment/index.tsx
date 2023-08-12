@@ -1,7 +1,5 @@
 import {useEffect, useState} from 'react';
-import {ActivityIndicator} from 'react-native';
 import {useTheme} from 'styled-components';
-import {useQueryClient} from '@tanstack/react-query';
 import {AdjustmentProps} from './interface';
 import {
   convertRegistryType,
@@ -22,14 +20,10 @@ import {
   CloseButton,
   DetailsContentContainer,
   Detail,
-  ResponseContainer,
-  ValidateButtonContainer,
-  ValidateButton,
 } from './styles';
 
 import {useAuthContext} from '../../hooks/useAuth';
-import {useAdjustmentsRequests} from '../../hooks/useAdjustmentsRequests';
-import {useRegistriesRequests} from '../../hooks/useRegistriesRequests';
+import {Avatar} from '../Avatar';
 
 export const Adjustment = ({adjustment}: AdjustmentProps) => {
   const {user} = useAuthContext();
@@ -38,18 +32,6 @@ export const Adjustment = ({adjustment}: AdjustmentProps) => {
 
   const [activeDetailsContainer, setActiveDetailsContainer] =
     useState<boolean>(false);
-
-  const [requestIsLoading, setRequestIsLoading] = useState<boolean>(false);
-
-  const queryClient = useQueryClient();
-
-  const {useValidateAdjustmentRequest} = useAdjustmentsRequests({queryClient});
-
-  const {useUpdateRegistryMutation} = useRegistriesRequests({queryClient});
-
-  const {mutateAsync: validateAdjustment} = useValidateAdjustmentRequest();
-
-  const {mutateAsync: updateRegistry} = useUpdateRegistryMutation();
 
   const {COLORS, FONT_SIZE} = useTheme();
 
@@ -69,18 +51,6 @@ export const Adjustment = ({adjustment}: AdjustmentProps) => {
         setStatusColor(COLORS.ERROR);
         break;
     }
-  };
-
-  const handleValidateAdjustment = async (newStatus: string) => {
-    setRequestIsLoading(true);
-    const evaluatedAdjustment = await validateAdjustment({
-      adjustment_id: adjustment.id,
-      data: {
-        reviewer: user?.user_id,
-        new_status: newStatus,
-      },
-    });
-    setRequestIsLoading(false);
   };
 
   useEffect(() => {
@@ -167,44 +137,15 @@ export const Adjustment = ({adjustment}: AdjustmentProps) => {
             {<DetailLabel weight={400}>{` ${adjustment.reason}`}</DetailLabel>}
           </DetailLabel>
         </Detail>
-        {adjustment.status == 'REJECTED' || adjustment.status == 'ACCEPTED' ? (
-          <Detail>
-            <DetailLabel>Revisado por:</DetailLabel>
-            <DetailLabel weight={400}>
-              {` ${adjustment.request_reviewer?.name} ${adjustment.request_reviewer?.surname}`}
-            </DetailLabel>
-          </Detail>
-        ) : (
-          <ResponseContainer color={COLORS.WHITE}>
-            <DetailLabel>Avalie a requisição</DetailLabel>
-            <ResponseContainer color={COLORS.WHITE} rowDirection={true}>
-              <ValidateButtonContainer>
-                <ValidateButton
-                  onPress={() => handleValidateAdjustment('ACCEPTED')}
-                  color={COLORS.ACCEPTED}>
-                  {requestIsLoading ? (
-                    <ActivityIndicator size="small" color={COLORS.WHITE} />
-                  ) : (
-                    <AcceptedIcon size={26} />
-                  )}
-                </ValidateButton>
-                <DetailLabel weight={400}>ACEITAR</DetailLabel>
-              </ValidateButtonContainer>
-              <ValidateButtonContainer>
-                <ValidateButton
-                  onPress={() => handleValidateAdjustment('REJECTED')}
-                  color={COLORS.ERROR}>
-                  {requestIsLoading ? (
-                    <ActivityIndicator size="small" color={COLORS.WHITE} />
-                  ) : (
-                    <RejectedIcon size={26} />
-                  )}
-                </ValidateButton>
-                <DetailLabel weight={400}>REJEITAR</DetailLabel>
-              </ValidateButtonContainer>
-            </ResponseContainer>
-          </ResponseContainer>
-        )}
+        {adjustment.status == 'REJECTED' ||
+          (adjustment.status == 'ACCEPTED' && (
+            <Detail>
+              <DetailLabel>Revisado por:</DetailLabel>
+              <DetailLabel weight={400}>
+                {` ${adjustment.adjustment_reviewer?.name} ${adjustment.adjustment_reviewer?.surname}`}
+              </DetailLabel>
+            </Detail>
+          ))}
       </DetailsContentContainer>
     </DetailsContainer>
   ) : (
@@ -220,10 +161,10 @@ export const Adjustment = ({adjustment}: AdjustmentProps) => {
         )}
       </StatusIconContainer>
       <StatusDetailsContainer>
-        <DetailLabel>
+        <DetailLabel weight={600}>
           Data do registro: {formatDateToDayMonth(adjustment.registry.date)}
         </DetailLabel>
-        <DetailLabel>
+        <DetailLabel weight={600}>
           Status:{' '}
           {
             <StatusLabel color={statusColor}>
@@ -232,6 +173,20 @@ export const Adjustment = ({adjustment}: AdjustmentProps) => {
           }
         </DetailLabel>
       </StatusDetailsContainer>
+      {adjustment.reviewer && (
+        <StatusDetailsContainer>
+          <DetailLabel weight={600}>Revisado por:</DetailLabel>
+          <Avatar
+            headerAvatar={false}
+            collaborator_id={adjustment.reviewer}
+            size={30}
+          />
+          <DetailLabel
+            weight={
+              400
+            }>{`${adjustment.adjustment_reviewer?.name} ${adjustment.adjustment_reviewer?.surname}`}</DetailLabel>
+        </StatusDetailsContainer>
+      )}
     </StatusContainer>
   );
 };

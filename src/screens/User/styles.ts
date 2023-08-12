@@ -1,6 +1,6 @@
 import styled, {css} from 'styled-components/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {SignOut, UserCircle} from 'phosphor-react-native';
+import {CaretLeft, SignOut, UserFocus} from 'phosphor-react-native';
 
 interface UserInfosContentProps {
   height?: number;
@@ -16,6 +16,11 @@ interface UserShiftContainerProps {
 interface UserInfoTextProps {
   weight?: number;
   color?: string;
+}
+
+export interface IconButtonProps {
+  width: number;
+  height: number;
 }
 
 export const Container = styled.View`
@@ -97,14 +102,36 @@ export const SignOutText = styled.Text`
   `}
 `;
 
+export const IconButton = styled.TouchableOpacity<IconButtonProps>`
+  ${({width, height, theme}) => css`
+    width: ${width}px;
+    height: ${height}px;
+    background-color: ${theme.COLORS.WHITE};
+    border-radius: 45px;
+    justify-content: center;
+    align-items: center;
+  `}
+`;
+
+export const UserImage = styled.Image`
+  width: 90px;
+  height: 90px;
+  border-radius: 45px;
+`;
+
 export const SignOutIcon = styled(SignOut).attrs(({theme}) => ({
   size: 26,
   color: theme.COLORS.WHITE,
   weight: 'bold',
 }))``;
 
-export const UserIcon = styled(UserCircle).attrs(({theme}) => ({
-  size: 86,
+export const UserPhotoIcon = styled(UserFocus).attrs(({theme}) => ({
+  size: 76,
   color: theme.COLORS.GRAY_200,
-  weight: 'fill',
+  weight: 'light',
+}))``;
+
+export const BackIcon = styled(CaretLeft).attrs(({theme}) => ({
+  size: 36,
+  color: theme.COLORS.GRAY_300,
 }))``;

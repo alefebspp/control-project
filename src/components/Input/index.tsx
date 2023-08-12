@@ -4,30 +4,32 @@ import {
   InputLabel,
   ErrorMessageText,
 } from './styles';
-import {TextInputProps} from 'react-native';
 import {useTheme} from 'styled-components/native';
-
-interface InputProps extends TextInputProps {
-  label: string;
-  errorMessage?: string;
-  isTextArea?: boolean;
-}
+import {InputProps} from './interface';
 
 export const Input = ({
   label,
   errorMessage,
   isTextArea,
+  backgroundColor,
+  borderColor,
+  labelIcon,
   ...props
 }: InputProps) => {
   const {COLORS} = useTheme();
 
   return (
     <Container>
-      <InputLabel>{label}</InputLabel>
+      <Container alignItems="center" gap={5} flexDirection="row">
+        {labelIcon}
+        <InputLabel>{label}</InputLabel>
+      </Container>
       <InputContainer
         {...props}
         placeholderTextColor={COLORS.GRAY_100}
         textAlignVertical={isTextArea ? 'top' : 'center'}
+        backgroundColor={backgroundColor}
+        borderColor={borderColor}
       />
       <ErrorMessageText>{errorMessage}</ErrorMessageText>
     </Container>

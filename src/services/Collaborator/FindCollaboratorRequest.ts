@@ -5,7 +5,7 @@ export const findCollaboratorRequest = async (
   collaborator_id: string | undefined,
 ): Promise<Collaborator> => {
   try {
-    const {data} = await api.get(`/collaborator/${collaborator_id}`);
+    const {data} = await api.get(`/collaborator/find/${collaborator_id}`);
 
     return data;
   } catch (error) {

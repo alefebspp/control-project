@@ -113,7 +113,7 @@ export const ModalDatePickerButton = styled(
 
 export const DatePickerIcon = styled(Clock).attrs(({theme}) => ({
   size: 36,
-  color: theme.COLORS.WHITE,
+  color: theme.COLORS.BLUE_300,
 }))``;
 
 export const UpdateIcon = styled(ClockClockwise).attrs(({theme}) => ({

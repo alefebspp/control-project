@@ -18,7 +18,7 @@ export interface Adjustment {
   registry: Registry;
   collaborator: Collaborator;
   reviewer?: string;
-  request_reviewer?: Collaborator;
+  adjustment_reviewer?: Collaborator;
   reviewer_response?: string;
 }
 

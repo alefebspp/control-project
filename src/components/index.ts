@@ -6,3 +6,5 @@ export {Header} from './Header';
 export {Empty} from './Empty';
 export {Adjustment} from './Adjustment';
 export {Select} from './Select';
+export {Locations} from './Locations';
+export {Avatar} from './Avatar';

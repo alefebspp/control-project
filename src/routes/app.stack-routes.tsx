@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AppTabRoutes} from './app.tab-routes';
-import {CreateEditRegistry} from '../screens';
+import {CreateEditRegistry, User} from '../screens';
 
 export const AppStackRoutes = () => {
   const {Navigator, Screen} = createNativeStackNavigator();
@@ -9,6 +9,7 @@ export const AppStackRoutes = () => {
     <Navigator screenOptions={{headerShown: false}}>
       <Screen name="home" component={AppTabRoutes} />
       <Screen name="registry" component={CreateEditRegistry} />
+      <Screen name="user" component={User} />
     </Navigator>
   );
 };

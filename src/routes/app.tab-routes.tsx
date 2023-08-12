@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTheme} from 'styled-components';
-import {HouseLine, GearSix, ClockClockwise} from 'phosphor-react-native';
-import {Home, User, Adjustments} from '../screens';
+import {HouseLine, ClockClockwise} from 'phosphor-react-native';
+import {Home, Adjustments} from '../screens';
 import {useAuthContext} from '../hooks/useAuth';
 import {Loading} from '../components/Loading';
 
@@ -48,22 +48,6 @@ export const AppTabRoutes = () => {
             />
           ),
           tabBarLabel: 'Ajustes',
-        }}
-      />
-      <Screen
-        name="user"
-        component={User}
-        options={{
-          tabBarActiveTintColor: COLORS.BLUE_300,
-          tabBarInactiveTintColor: COLORS.GRAY_200,
-          tabBarIcon: ({focused}) => (
-            <GearSix
-              size={36}
-              color={focused ? COLORS.BLUE_300 : COLORS.GRAY_200}
-              weight={focused ? 'fill' : 'regular'}
-            />
-          ),
-          tabBarLabel: 'Config.',
         }}
       />
     </Navigator>

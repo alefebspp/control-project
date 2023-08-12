@@ -9,6 +9,7 @@ export interface Registry {
   interval_end?: string;
   interval_end_location?: string;
   collaborator_id?: string;
+  company_id: string;
   id: string;
 }
 

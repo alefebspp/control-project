@@ -25,9 +25,9 @@ export const Header = styled(SafeAreaView)`
 
 export const ContentContainer = styled.View`
   flex: 1;
-  padding: 10px;
+  padding: 15px;
   flex-direction: column;
-  gap: 15px;
+  justify-content: space-between;
 `;
 
 export const IconButton = styled.TouchableOpacity<IconButtonProps>`
@@ -56,7 +56,7 @@ export const RegistryContainer = styled.View`
 `;
 
 export const Registry = styled.View`
-  background-color: ${({theme}) => theme.COLORS.BLUE_300};
+  background-color: ${({theme}) => theme.COLORS.BLUE_100};
   height: 50px;
   justify-content: center;
   align-items: center;
@@ -74,7 +74,7 @@ export const RegistryTypeLabel = styled.Text`
   ${({theme}) => css`
     color: ${theme.COLORS.GRAY_300};
     font-size: ${theme.FONT_SIZE.MD}px;
-    font-weight: 500;
+    font-weight: 400;
   `}
 `;
 

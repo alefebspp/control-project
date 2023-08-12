@@ -104,6 +104,7 @@ export const ModalDatePicker = ({registryType, registry}: DatePickerProps) => {
       [`${registryType}_location`]: location,
       collaborator_id: user?.user_id,
       date: currentDate,
+      company_id: user?.user_company,
     });
     hideDatePicker();
   };
@@ -190,11 +191,7 @@ export const ModalDatePicker = ({registryType, registry}: DatePickerProps) => {
       </Modal>
       <View>
         <ModalDatePickerButton
-          backgroundColor={
-            registryTypeAlreadyExists || !currentDateEqualsRegistryDate
-              ? COLORS.WHITE
-              : COLORS.BLUE_300
-          }
+          backgroundColor={COLORS.WHITE}
           onPress={showDatePicker}>
           {registryTypeAlreadyExists || !currentDateEqualsRegistryDate ? (
             <UpdateIcon />

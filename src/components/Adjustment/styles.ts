@@ -26,7 +26,8 @@ export const StatusContainer = styled.TouchableOpacity`
     height: ${0.08 * windowHeight}px;
     background-color: ${theme.COLORS.WHITE};
     flex-direction: row;
-    gap: 10px;
+    justify-content: flex-start;
+    gap: 5px;
     margin-bottom: 10px;
   `}
 `;
@@ -83,7 +84,7 @@ export const CloseButton = styled.TouchableOpacity`
 `;
 
 export const StatusDetailsContainer = styled.View`
-  width: 70%;
+  width: 35%;
   height: 100%;
   justify-content: space-between;
 `;

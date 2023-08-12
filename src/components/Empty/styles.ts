@@ -1,5 +1,9 @@
 import styled, {css} from 'styled-components/native';
-import {XCircle} from 'phosphor-react-native';
+import {NotePencil, XCircle} from 'phosphor-react-native';
+
+interface EmptyTextProps {
+  highlight?: boolean;
+}
 
 export const Container = styled.View`
   width: 100%;
@@ -8,16 +12,17 @@ export const Container = styled.View`
   align-items: center;
   padding-top: 20px;
 `;
-export const EmptyText = styled.Text`
-  ${({theme}) => css`
-    color: ${theme.COLORS.GRAY_200};
-    font-size: ${theme.FONT_SIZE.LG}px;
-    font-weight: 700;
+export const EmptyText = styled.Text<EmptyTextProps>`
+  ${({theme, highlight}) => css`
+    color: ${highlight ? theme.COLORS.BLUE_400 : theme.COLORS.GRAY_200};
+    font-size: ${theme.FONT_SIZE.MD}px;
+    font-weight: ${highlight ? 600 : 400};
+    text-decoration: ${highlight ? 'underline' : 'none'};
+    text-align: center;
   `}
 `;
 
-export const EmptyIcon = styled(XCircle).attrs(({theme}) => ({
+export const EmptyIcon = styled(NotePencil).attrs(({theme}) => ({
   size: 56,
-  color: theme.COLORS.GRAY_200,
-  weight: 'fill',
+  color: theme.COLORS.BLUE_400,
 }))``;

@@ -8,6 +8,7 @@ type RootStackParamList = {
   registry: {
     registryDate?: Date | undefined;
   };
+  user: undefined;
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;

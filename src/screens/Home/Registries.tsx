@@ -51,7 +51,7 @@ export const Registries = ({currentMonthAndYearDescription}: PageProps) => {
   const {data: statistics, isLoading: statisticsIsLoading} =
     useCalculateRegistriesHours(period, user?.user_id);
 
-  const isRegistriesDataEmpty = registries?.length == 0;
+  const emptyRegistriesData = registries?.length == 0;
 
   const {COLORS} = useTheme();
 
@@ -84,8 +84,8 @@ export const Registries = ({currentMonthAndYearDescription}: PageProps) => {
           </RegistryTextContainer>
         </Registry>
 
-        {isRegistriesDataEmpty ? (
-          <Empty />
+        {emptyRegistriesData ? (
+          <Empty dataName="registros" />
         ) : registriesIsLoading ? (
           <RegistriesShimmer />
         ) : (
@@ -139,7 +139,9 @@ export const Registries = ({currentMonthAndYearDescription}: PageProps) => {
         ) : (
           <MonthStatisticsSection>
             <TitleContainer borderBottonWidth={2}>
-              <Title>{getMonthAndYearDescription(period)}</Title>
+              <Title weight={400} color={COLORS.GRAY_200}>
+                Estatísticas - {getMonthAndYearDescription(period)}
+              </Title>
             </TitleContainer>
             <StatisticContainer>
               <StatisticContainer
@@ -148,7 +150,9 @@ export const Registries = ({currentMonthAndYearDescription}: PageProps) => {
                 width={50}>
                 <TitleContainer>
                   <UpChart />
-                  <Title weight={300}>Adicional</Title>
+                  <Title color={COLORS.GRAY_200} weight={300}>
+                    Adicional
+                  </Title>
                 </TitleContainer>
                 {statisticsIsLoading ? (
                   <StatisticShimmer />
@@ -170,7 +174,9 @@ export const Registries = ({currentMonthAndYearDescription}: PageProps) => {
                 width={50}>
                 <TitleContainer>
                   <DownChart />
-                  <Title weight={300}>Pendente</Title>
+                  <Title color={COLORS.GRAY_200} weight={300}>
+                    Pendente
+                  </Title>
                 </TitleContainer>
                 {statisticsIsLoading ? (
                   <StatisticShimmer />

@@ -2,6 +2,7 @@ import {api} from '../api';
 
 export interface CreateRegistryRequestData {
   collaborator_id: string | undefined;
+  company_id: string | undefined;
   date: string;
   start?: string;
   start_location?: string;

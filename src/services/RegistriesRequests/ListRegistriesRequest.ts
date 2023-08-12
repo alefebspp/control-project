@@ -1,7 +1,5 @@
 import {api} from '../api';
 import {AxiosError} from 'axios';
-import {Registry} from './interface';
-import axios from 'axios';
 
 export const ListRegistriesRequest = async () => {
   try {

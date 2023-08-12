@@ -1,19 +1,34 @@
 import styled, {css} from 'styled-components/native';
 import {TextInput} from 'react-native';
 
-export const InputContainer = styled(TextInput)`
-  ${({theme}) => css`
-    /* min-height: 56px; */
+interface InputContainerProps {
+  backgroundColor?: string;
+  borderColor?: string;
+}
+
+interface ContainerProps {
+  flexDirection?: string;
+  gap?: number;
+  alignItems?: string;
+}
+
+export const InputContainer = styled(TextInput)<InputContainerProps>`
+  ${({theme, borderColor, backgroundColor}) => css`
     min-width: 56px;
     color: ${theme.COLORS.GRAY_200};
-    border: 3px solid ${theme.COLORS.GRAY_200};
+    border: 3px solid ${borderColor ? borderColor : theme.COLORS.GRAY_200};
+    background-color: ${backgroundColor ? backgroundColor : 'transparent'};
     padding: 10px 10px 10px 10px;
     border-radius: 10px;
   `}
 `;
 
-export const Container = styled.View`
-  flex-direction: column;
+export const Container = styled.View<ContainerProps>`
+  ${({theme, flexDirection, gap, alignItems}) => css`
+    flex-direction: ${flexDirection ? flexDirection : 'column'};
+    gap: ${gap ? `${gap}px` : 0};
+    ${alignItems && `align-items: ${alignItems}`}
+  `}
 `;
 
 export const ErrorMessageText = styled.Text`

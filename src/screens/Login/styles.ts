@@ -1,10 +1,10 @@
 import styled, {css} from 'styled-components/native';
-import {ClockClockwise} from 'phosphor-react-native';
+import {ClockClockwise, Envelope, LockKey} from 'phosphor-react-native';
 
-export const Container = styled.View`
+export const Container = styled.KeyboardAvoidingView`
   width: 100%;
   height: 100%;
-  background-color: ${({theme}) => theme.COLORS.GRAY_100};
+  background-color: ${({theme}) => theme.COLORS.GRAY_50};
   justify-content: center;
   align-items: center;
   padding: 10px;
@@ -42,4 +42,16 @@ export const LogoIcon = styled(ClockClockwise).attrs(({theme}) => ({
   size: 50,
   weight: 'regular',
   color: theme.COLORS.WHITE,
+}))``;
+
+export const EmailIcon = styled(Envelope).attrs(({theme}) => ({
+  size: 30,
+  weight: 'regular',
+  color: theme.COLORS.GRAY_200,
+}))``;
+
+export const LockIcon = styled(LockKey).attrs(({theme}) => ({
+  size: 30,
+  weight: 'regular',
+  color: theme.COLORS.GRAY_200,
 }))``;

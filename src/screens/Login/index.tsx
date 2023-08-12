@@ -2,7 +2,15 @@ import {useState} from 'react';
 import {ActivityIndicator} from 'react-native';
 import Toast from 'react-native-toast-message';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {LoginForm, Container, Logo, LogoIcon, ButtonText} from './styles';
+import {
+  LoginForm,
+  Container,
+  Logo,
+  LogoIcon,
+  ButtonText,
+  EmailIcon,
+  LockIcon,
+} from './styles';
 import {Input} from '../../components/Input';
 import {Button} from '../../components/Button';
 import {useForm, Controller} from 'react-hook-form';
@@ -49,7 +57,7 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container behavior="height" keyboardVerticalOffset={-200}>
       <LoginForm>
         <Logo>
           <LogoIcon />
@@ -59,6 +67,9 @@ export const Login: React.FC = () => {
           control={control}
           render={({field: {onChange, value}}) => (
             <Input
+              labelIcon={<EmailIcon />}
+              backgroundColor={COLORS.WHITE}
+              borderColor={COLORS.WHITE}
               label="Email"
               onChangeText={onChange}
               value={value}
@@ -72,6 +83,9 @@ export const Login: React.FC = () => {
           control={control}
           render={({field: {onChange, value}}) => (
             <Input
+              labelIcon={<LockIcon />}
+              backgroundColor={COLORS.WHITE}
+              borderColor={COLORS.WHITE}
               label="Senha"
               onChangeText={onChange}
               value={value}

@@ -1,5 +1,5 @@
 import {ScrollView} from 'react-native';
-import {Adjustment, Select} from '../../components';
+import {Adjustment, Empty, Select} from '../../components';
 import {useAdjustmentsRequests} from '../../hooks/useAdjustmentsRequests';
 import {AdjustmentsContainer, Header, PageContainer} from './styles';
 import {Adjustment as AdjustmentInterface} from '../../services/AdjustmentsRequests/interface';
@@ -25,6 +25,8 @@ export const Adjustments = () => {
 
   const currentMonthAndYearDescription = getCurrentMonthAndYearDescription();
 
+  const emptyAdjustmentsData = adjustments?.length == 0;
+
   return (
     <PageContainer>
       <Header></Header>
@@ -34,7 +36,9 @@ export const Adjustments = () => {
       />
       <AdjustmentsContainer>
         <ScrollView showsHorizontalScrollIndicator={false}>
-          {isLoading ? (
+          {emptyAdjustmentsData ? (
+            <Empty dataName="ajustes" />
+          ) : isLoading ? (
             <AdjustmentsShimmer />
           ) : (
             adjustments?.map((adjustment: AdjustmentInterface) => (

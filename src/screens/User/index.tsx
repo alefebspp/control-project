@@ -1,10 +1,13 @@
 import {useTheme} from 'styled-components';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {useNavigation} from '@react-navigation/native';
+import {useQueryClient} from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
 import {useAuthContext} from '../../hooks/useAuth';
 import {
   Header,
   Container,
   ContentContainer,
-  UserIcon,
   UserInfosContainer,
   UserInfosContent,
   UserInfoText,
@@ -12,25 +15,83 @@ import {
   SignOutButton,
   SignOutIcon,
   UserShiftContainer,
+  IconButton,
+  BackIcon,
+  UserPhotoIcon,
+  UserImage,
 } from './styles';
 import {useCollaboratorRequests} from '../../hooks/useCollaboratorRequests';
 import {ShiftShimmer} from './shimmer';
+import {Avatar} from '../../components';
 
 export const User = () => {
   const {COLORS} = useTheme();
 
+  const queryClient = useQueryClient();
+
+  const {navigate} = useNavigation();
+
   const {user, signOut} = useAuthContext();
 
-  const {useFindCollaborator} = useCollaboratorRequests();
+  const {useFindCollaborator, useChangeCollaboratorAvatar} =
+    useCollaboratorRequests({queryClient});
 
   const {data: collaborator, isLoading} = useFindCollaborator(user?.user_id);
+  const {mutateAsync: changeAvatar, isLoading: changingAvatar} =
+    useChangeCollaboratorAvatar();
+
+  const handleGoBack = () => {
+    navigate('home');
+  };
+
+  async function handleUserPhotoSelect() {
+    const photoSelected = await launchImageLibrary({
+      mediaType: 'photo',
+      quality: 1,
+    });
+
+    if (photoSelected.didCancel) {
+      return;
+    }
+
+    if (photoSelected.assets) {
+      const [photo] = photoSelected.assets;
+      if (photo.fileSize && photo.fileSize / 1024 / 1024 > 5) {
+        return Toast.show({
+          type: 'error',
+          text1: 'Imagem muito grande',
+          text2: 'Escolha uma de até 5MB',
+        });
+      }
+      const fileExtension = photo.type?.split('/')[1];
+      const photoFile = {
+        name: `${user?.user_name}.${fileExtension}`.toLowerCase(),
+        uri: photo.uri,
+        type: photo.type,
+      };
+
+      const userPhotoUploadForm = new FormData();
+      userPhotoUploadForm.append('file', photoFile);
+
+      await changeAvatar({
+        form: userPhotoUploadForm,
+        collaborator_id: user?.user_id,
+      });
+    }
+  }
 
   return (
     <Container>
-      <Header></Header>
+      <Header>
+        <IconButton width={40} height={40} onPress={handleGoBack}>
+          <BackIcon />
+        </IconButton>
+      </Header>
       <ContentContainer>
         <UserInfosContainer>
-          <UserIcon />
+          <UserInfosContent>
+            <Avatar size={90} headerAvatar={false} />
+          </UserInfosContent>
           <UserInfosContent>
             <UserInfoText>{`${user?.user_name} ${user?.user_surname}`}</UserInfoText>
           </UserInfosContent>

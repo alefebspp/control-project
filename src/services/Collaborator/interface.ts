@@ -8,4 +8,10 @@ export interface Collaborator {
   shift_end: string;
   interval_start: string;
   interval_end: string;
+  avatar: string | null;
+}
+
+export interface ChangeCollaboratorAvatarRequest {
+  form: FormData;
+  collaborator_id: string | undefined;
 }

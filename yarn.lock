@@ -2855,6 +2855,7 @@ __metadata:
     react-hook-form: ^7.44.3
     react-native: 0.71.7
     react-native-dotenv: ^3.4.8
+    react-native-image-picker: ^5.6.0
     react-native-linear-gradient: ^2.7.3
     react-native-modal-datetime-picker: ^15.0.1
     react-native-safe-area-context: 3.3.2
@@ -8682,6 +8683,16 @@ __metadata:
   version: 0.71.17
   resolution: "react-native-gradle-plugin@npm:0.71.17"
   checksum: 5ff996bafc3959a36551dc34d481cefb070ede4025b5eb2ce659f51adf74ba0e6845cc019ea1d547e0b4007f1c3c68146fa719688f09bde308f25320c6c6f834
+  languageName: node
+  linkType: hard
+
+"react-native-image-picker@npm:^5.6.0":
+  version: 5.6.0
+  resolution: "react-native-image-picker@npm:5.6.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 3797ec006c2d1f7b96c088c25d972113ef61f42e499f1bdbc553630acecab613d671a2c7d050029a7b01df144e83992ea2639b33255cfa487bf422943ded419b
   languageName: node
   linkType: hard
 

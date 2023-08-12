@@ -15,7 +15,7 @@ import {
   ActionsContainer,
   UpdateIcon,
 } from './styles';
-import {ModalDatePicker, Clock} from '../../../components';
+import {ModalDatePicker, Clock, Locations} from '../../../components';
 import {
   getCurrentDate,
   formatRegistryTime,
@@ -84,6 +84,10 @@ export const CreateEditRegistry: React.FC = () => {
           />
         </ContentContainer>
       )}
+      <Locations
+        registry={registry ? registry[0] : undefined}
+        isLoading={isLoading}
+      />
     </Container>
   );
 };

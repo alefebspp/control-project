@@ -5,6 +5,7 @@ import {
   ChartLineUp,
   TrendUp,
   TrendDown,
+  User,
 } from 'phosphor-react-native';
 import {Dimensions, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -31,6 +32,10 @@ interface TitleProps {
   weight?: number;
   size?: number;
   color?: string;
+}
+
+interface HeaderButtonProps {
+  lightBackground?: boolean;
 }
 
 const windowWidth = Dimensions.get('screen').width;
@@ -79,14 +84,18 @@ export const RegistryText = styled.Text`
   color: ${({theme}) => theme.COLORS.GRAY_200};
 `;
 
-export const AddRegistryButton = styled(TouchableOpacity)`
-  width: 36px;
-  height: 36px;
-  border-radius: 18px;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({theme}) => theme.COLORS.GRAY_300};
-  margin: 0 10px 5px 0;
+export const HeaderButton = styled(TouchableOpacity)<HeaderButtonProps>`
+  ${({theme, lightBackground}) => css`
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    justify-content: center;
+    align-items: center;
+    background-color: ${lightBackground
+      ? theme.COLORS.GRAY_100
+      : theme.COLORS.GRAY_300};
+    margin: 0 10px 5px 10px;
+  `}
 `;
 
 export const Header = styled(SafeAreaView)`
@@ -95,7 +104,7 @@ export const Header = styled(SafeAreaView)`
   width: 100%;
   height: 12%;
   background-color: ${({theme}) => theme.COLORS.WHITE};
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: flex-end;
 `;
 
@@ -107,7 +116,7 @@ export const MonthStatisticContainer = styled(
     width: ${isOpen ? `${windowWidth - 20}px` : '40px'};
     border-radius: 10px;
     height: ${isOpen ? '25%' : '40px'};
-    background-color: ${theme.COLORS.GRAY_300};
+    background-color: ${theme.COLORS.WHITE};
     bottom: 0;
     right: 0;
     margin: 0 10px 10px 10px;
@@ -163,6 +172,12 @@ export const Title = styled.Text<TitleProps>`
   `}
 `;
 
+export const UserIcon = styled(User).attrs(({theme}) => ({
+  size: 26,
+  color: theme.COLORS.GRAY_200,
+  weight: 'fill',
+}))``;
+
 export const AddRegistryIcon = styled(Clock).attrs(({theme}) => ({
   size: 36,
   color: theme.COLORS.WHITE,
@@ -171,7 +186,7 @@ export const AddRegistryIcon = styled(Clock).attrs(({theme}) => ({
 
 export const StatisticIcon = styled(ChartLineUp).attrs(({theme, color}) => ({
   size: 26,
-  color: color ? color : theme.COLORS.WHITE,
+  color: color ? color : theme.COLORS.BLUE_200,
 }))`
   margin: auto;
 `;
