@@ -56,7 +56,8 @@ export const RegistryContainer = styled.View`
 `;
 
 export const Registry = styled.View`
-  background-color: ${({theme}) => theme.COLORS.BLUE_100};
+  background-color: ${({theme}) => theme.COLORS.WHITE};
+  border: 1px solid ${({theme}) => theme.COLORS.GRAY_100};
   height: 50px;
   justify-content: center;
   align-items: center;
@@ -65,7 +66,7 @@ export const Registry = styled.View`
 
 export const DateText = styled.Text`
   ${({theme}) => css`
-    color: ${theme.COLORS.WHITE};
+    color: ${theme.COLORS.GRAY_300};
     font-size: ${theme.FONT_SIZE.MD}px;
   `}
 `;

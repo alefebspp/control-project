@@ -242,6 +242,7 @@ const CreateAdjustment = ({
       collaborator_id: registry?.collaborator_id,
       new_value: hourAndMinutes,
       previous_value: registry?.[registryType],
+      company_id: registry?.company_id,
     });
     hideDatePicker();
     navigate('adjustments');

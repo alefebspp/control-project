@@ -140,7 +140,7 @@ export const Registries = ({currentMonthAndYearDescription}: PageProps) => {
           <MonthStatisticsSection>
             <TitleContainer borderBottonWidth={2}>
               <Title weight={400} color={COLORS.GRAY_200}>
-                Estatísticas - {getMonthAndYearDescription(period)}
+                Estatísticas - {statistics?.monthLabel}
               </Title>
             </TitleContainer>
             <StatisticContainer>
@@ -163,7 +163,7 @@ export const Registries = ({currentMonthAndYearDescription}: PageProps) => {
                     borderRadius={15}
                     backgroundColor={COLORS.ACCEPTED}>
                     <Title weight={300} size={30}>
-                      {statistics?.aditionalTotalHours}
+                      {statistics?.aditionalHours.label}
                     </Title>
                   </TitleContainer>
                 )}
@@ -187,7 +187,7 @@ export const Registries = ({currentMonthAndYearDescription}: PageProps) => {
                     width={70}
                     backgroundColor={COLORS.ERROR}>
                     <Title weight={300} size={30}>
-                      {statistics?.pendingTotalHours}
+                      {statistics?.pendingHours.label}
                     </Title>
                   </TitleContainer>
                 )}

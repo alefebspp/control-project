@@ -14,6 +14,13 @@ export interface Registry {
 }
 
 export interface Statistics {
-  aditionalTotalHours: string;
-  pendingTotalHours: string;
+  aditionalHours: {
+    value: number;
+    label: string;
+  };
+  pendingHours: {
+    value: number;
+    label: string;
+  };
+  monthLabel: string;
 }

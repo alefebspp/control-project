@@ -5,6 +5,7 @@ export interface Adjustment {
   id: string;
   registry_id: string;
   collaborator_id: string;
+  company_id: string;
   status?: string;
   reason: string;
   registry_type: keyof Pick<
@@ -31,6 +32,7 @@ export interface CreateAdjustmentProps {
   new_value: string | undefined;
   previous_value: string | undefined;
   collaborator_id: string | undefined;
+  company_id: string | undefined;
 }
 
 export interface ValidateAdjustmentProps {
