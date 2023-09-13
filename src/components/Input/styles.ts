@@ -16,7 +16,7 @@ export const InputContainer = styled(TextInput)<InputContainerProps>`
   ${({theme, borderColor, backgroundColor}) => css`
     min-width: 56px;
     color: ${theme.COLORS.GRAY_200};
-    border: 3px solid ${borderColor ? borderColor : theme.COLORS.GRAY_200};
+    border: 1px solid ${borderColor ? borderColor : theme.COLORS.GRAY_200};
     background-color: ${backgroundColor ? backgroundColor : 'transparent'};
     padding: 10px 10px 10px 10px;
     border-radius: 10px;

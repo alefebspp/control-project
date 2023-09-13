@@ -15,7 +15,7 @@ export const Button = ({
 }: Props) => {
   return (
     <Container isLoading={isLoading} type={type} {...rest}>
-      {children}
+      <Title>{children}</Title>
     </Container>
   );
 };

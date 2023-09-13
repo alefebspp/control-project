@@ -17,7 +17,7 @@ export const AppTabRoutes = () => {
   }
 
   return (
-    <Navigator screenOptions={{headerShown: false}}>
+    <Navigator screenOptions={{headerShown: false, tabBarShowLabel: false}}>
       <Screen
         name="registries"
         component={Home}
@@ -26,12 +26,10 @@ export const AppTabRoutes = () => {
           tabBarInactiveTintColor: COLORS.GRAY_200,
           tabBarIcon: ({focused}) => (
             <HouseLine
-              size={36}
+              size={32}
               color={focused ? COLORS.BLUE_300 : COLORS.GRAY_200}
-              weight={focused ? 'fill' : 'regular'}
             />
           ),
-          tabBarLabel: 'Início',
         }}
       />
       <Screen
@@ -42,12 +40,10 @@ export const AppTabRoutes = () => {
           tabBarInactiveTintColor: COLORS.GRAY_200,
           tabBarIcon: ({focused}) => (
             <ClockClockwise
-              size={36}
+              size={32}
               color={focused ? COLORS.BLUE_300 : COLORS.GRAY_200}
-              weight={focused ? 'fill' : 'regular'}
             />
           ),
-          tabBarLabel: 'Ajustes',
         }}
       />
     </Navigator>

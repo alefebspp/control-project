@@ -13,16 +13,22 @@ export function checkIfCurrentDateEqualsRegistryDate(
   registryDate: Date | undefined,
 ) {
   if (!registryDate) {
-    registryDate = new Date();
+    return true;
   }
-  const currentDate = new Date();
-  const currentDateString = formatDateISOString(
-    resetDateTime(currentDate)!.toISOString(),
-  );
+  if (registryDate) {
+    const currentDate = new Date();
+    const resetCurrentDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate(),
+    );
+    const registryNewDate = new Date(registryDate);
+    const resetRegistryDate = new Date(
+      registryNewDate.getUTCFullYear(),
+      registryNewDate.getUTCMonth(),
+      registryNewDate.getUTCDate(),
+    );
 
-  const registryDateString = formatDateISOString(
-    new Date(registryDate).toISOString(),
-  );
-
-  return currentDateString == registryDateString;
+    return resetCurrentDate.getTime() === resetRegistryDate.getTime();
+  }
 }

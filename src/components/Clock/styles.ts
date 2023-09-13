@@ -8,6 +8,7 @@ export const Container = styled.View<ContainerProps>`
   width: 100%;
   height: 10%;
   background-color: ${({theme}) => theme.COLORS.WHITE};
+  border: 1px solid ${({theme}) => theme.COLORS.GRAY_100};
   justify-content: ${({justifyContent}) => justifyContent};
   align-items: center;
   border-radius: 5px;

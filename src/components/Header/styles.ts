@@ -11,7 +11,7 @@ export const Container = styled(SafeAreaView)`
   align-items: center;
   width: 100%;
   height: 12%;
-  background-color: ${({theme}) => theme.COLORS.WHITE};
+  background-color: ${({theme}) => theme.COLORS.GRAY_50};
   justify-content: center;
   align-items: flex-end;
 `;

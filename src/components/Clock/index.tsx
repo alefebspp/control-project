@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {resetDateTime, getHourMinutesFormated} from '../../utils';
+import {
+  resetDateTime,
+  getHourMinutesFormated,
+  checkIfCurrentDateEqualsRegistryDate,
+} from '../../utils';
 import {ClockText, Container} from './styles';
 import {ClockProps} from './interface';
 
 export const Clock = ({registryDate}: ClockProps) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  const formatedCurrentDate = resetDateTime(currentDate);
-
   const formatedRegistryDate = resetDateTime(registryDate);
+
+  const currentDateEqualsRegistryDate =
+    checkIfCurrentDateEqualsRegistryDate(registryDate);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,25 +28,26 @@ export const Clock = ({registryDate}: ClockProps) => {
   const getFormatedDate = () => {
     const date = registryDate ? formatedRegistryDate : currentDate;
 
-    const dia = registryDate ? date!.getUTCDate() : date!.getDate();
-    const mes = date!.getUTCMonth() + 1;
-    const ano = date!.getUTCFullYear();
+    const day = registryDate ? date!.getUTCDate() : date!.getDate();
+    const month = date!.getUTCMonth() + 1;
+    const year = date!.getUTCFullYear();
 
-    return `${formatNumber(dia)}/${formatNumber(mes)}/${ano}`;
+    return `${formatNumber(day)}/${formatNumber(month)}/${year}`;
   };
 
   const formatNumber = (numero: number) => {
     return numero.toString().padStart(2, '0');
   };
 
-  const isSameOrEmptyDate =
-    formatedCurrentDate?.getTime() == formatedRegistryDate?.getTime() ||
-    !registryDate;
-
   return (
-    <Container justifyContent={isSameOrEmptyDate ? 'space-evenly' : 'center'}>
+    <Container
+      justifyContent={
+        currentDateEqualsRegistryDate ? 'space-evenly' : 'center'
+      }>
       <ClockText>
-        {isSameOrEmptyDate ? getHourMinutesFormated(currentDate) : null}
+        {currentDateEqualsRegistryDate
+          ? getHourMinutesFormated(currentDate)
+          : null}
       </ClockText>
       <ClockText>{getFormatedDate()}</ClockText>
     </Container>

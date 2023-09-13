@@ -19,18 +19,16 @@ import {
   DownChart,
 } from './styles';
 import {useRegistriesRequests} from '../../hooks/useRegistriesRequests';
-import {
-  formatDateToDayMonth,
-  formatRegistryTime,
-  getMonthAndYearDescription,
-} from '../../utils';
+import {formatDateToDayMonth, formatRegistryTime} from '../../utils';
 import {Empty, Select} from '../../components';
 import {Registry as RegistryInterface} from '../../services/RegistriesRequests/interface';
 import {PageProps} from './interface';
 import {RegistriesShimmer, StatisticShimmer} from './shimmer';
+import {useRefetchOnFocus} from '../../hooks/useRefetchOnFocus';
 
 export const Registries = ({currentMonthAndYearDescription}: PageProps) => {
   const currentDate = new Date();
+  const {COLORS} = useTheme();
 
   const [showStatisctics, setShowStatistics] = useState<boolean>(false);
 
@@ -45,15 +43,29 @@ export const Registries = ({currentMonthAndYearDescription}: PageProps) => {
   const {useFindCollaboratorRegistries, useCalculateRegistriesHours} =
     useRegistriesRequests({});
 
-  const {data: registries, isLoading: registriesIsLoading} =
-    useFindCollaboratorRegistries(user?.user_id, undefined, period);
+  const cacheResponse = false;
 
-  const {data: statistics, isLoading: statisticsIsLoading} =
-    useCalculateRegistriesHours(period, user?.user_id);
+  const {
+    data: registries,
+    isLoading: registriesIsLoading,
+    refetch: refetchRegistries,
+  } = useFindCollaboratorRegistries(
+    user?.user_id,
+    undefined,
+    period,
+    cacheResponse,
+  );
+
+  const {
+    data: statistics,
+    isLoading: statisticsIsLoading,
+    refetch: refetchStatistics,
+  } = useCalculateRegistriesHours(period, user?.user_id, cacheResponse);
 
   const emptyRegistriesData = registries?.length == 0;
 
-  const {COLORS} = useTheme();
+  useRefetchOnFocus(refetchRegistries);
+  useRefetchOnFocus(refetchStatistics);
 
   return (
     <PageContainer>

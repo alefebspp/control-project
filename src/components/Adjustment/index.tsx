@@ -20,10 +20,11 @@ import {
   CloseButton,
   DetailsContentContainer,
   Detail,
+  ReviewerAvatar,
+  AvatarIcon,
 } from './styles';
 
 import {useAuthContext} from '../../hooks/useAuth';
-import {Avatar} from '../Avatar';
 
 export const Adjustment = ({adjustment}: AdjustmentProps) => {
   const {user} = useAuthContext();
@@ -161,26 +162,23 @@ export const Adjustment = ({adjustment}: AdjustmentProps) => {
         )}
       </StatusIconContainer>
       <StatusDetailsContainer>
-        <DetailLabel weight={600}>
+        <DetailLabel weight={400}>
           Data do registro: {formatDateToDayMonth(adjustment.registry.date)}
         </DetailLabel>
-        <DetailLabel weight={600}>
-          Status:{' '}
-          {
-            <StatusLabel color={statusColor}>
-              {convertStatusLabel(adjustment.status)}
-            </StatusLabel>
-          }
-        </DetailLabel>
+        <StatusLabel color={statusColor}>
+          {convertStatusLabel(adjustment.status)}
+        </StatusLabel>
       </StatusDetailsContainer>
       {adjustment.reviewer && (
         <StatusDetailsContainer>
-          <DetailLabel weight={600}>Revisado por:</DetailLabel>
-          <Avatar
-            headerAvatar={false}
-            collaborator_id={adjustment.reviewer}
-            size={30}
-          />
+          <DetailLabel weight={400}>Revisado por:</DetailLabel>
+          {adjustment.adjustment_reviewer?.avatar ? (
+            <ReviewerAvatar
+              source={{uri: adjustment.adjustment_reviewer?.avatar}}
+            />
+          ) : (
+            <AvatarIcon />
+          )}
           <DetailLabel
             weight={
               400

@@ -8,6 +8,7 @@ interface LocationsContainerProps {
   flexDirection?: string;
   padding?: number;
   backgroundColor?: string;
+  applyTopBorder?: boolean;
 }
 
 interface LocationLabelProps {
@@ -25,12 +26,15 @@ export const LocationsContainer = styled.View<LocationsContainerProps>`
     flexDirection,
     padding,
     backgroundColor,
+    applyTopBorder,
   }) => css`
     width: 100%;
     height: ${height ? `${height}%` : 'auto'};
     background-color: ${backgroundColor ? backgroundColor : theme.COLORS.WHITE};
     justify-content: ${justifyContent ? justifyContent : 'flex-start'};
     align-items: ${alignItems ? alignItems : 'flex-start'};
+    border-top-width: ${applyTopBorder ? '1px' : 0};
+    border-top-color: ${({theme}) => theme.COLORS.GRAY_100};
     flex-direction: ${flexDirection ? flexDirection : 'column'};
     padding: ${padding ? `${padding}px` : '0'};
     gap: 10px;

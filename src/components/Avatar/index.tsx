@@ -25,7 +25,7 @@ export const Avatar = ({headerAvatar, size, collaborator_id}: AvatarProps) => {
     useCollaboratorRequests({queryClient});
 
   const {data: collaborator, isLoading: loadingAvatar} = useFindCollaborator(
-    collaborator_id ? collaborator_id : user?.user_id,
+    user?.user_id,
   );
 
   const {mutateAsync: changeAvatar, isLoading: changingAvatar} =
