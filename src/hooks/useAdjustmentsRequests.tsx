@@ -48,6 +48,7 @@ export const useAdjustmentsRequests = ({
     return useQuery({
       queryFn: () => listAdjustmentsRequest(collaborator_id, period),
       queryKey: ['adjustments', period],
+      enabled: false,
     });
   };
 

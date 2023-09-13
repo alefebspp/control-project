@@ -42,20 +42,24 @@ export const useRegistriesRequests = ({
     collaboratorId?: string,
     date?: string,
     period?: string,
+    enabled: boolean = true,
   ) => {
     return useQuery({
       queryKey: ['registry', date, period],
       queryFn: () => findCollaboratorRegistries({collaboratorId, date, period}),
+      enabled,
     });
   };
 
   const useCalculateRegistriesHours = (
     period?: string,
     collaborator_id?: string,
+    enabled: boolean = true,
   ) => {
     return useQuery({
       queryKey: ['statistic', period],
       queryFn: () => calculateRegistriesHours(period, collaborator_id),
+      enabled,
     });
   };
 
