@@ -8,3 +8,5 @@ export {Adjustment} from './Adjustment';
 export {Select} from './Select';
 export {Locations} from './Locations';
 export {Avatar} from './Avatar';
+export {AuthInput} from './Input/AuthInput';
+export {MovingClock} from './MovingClock';

@@ -7,17 +7,16 @@ import {
   Container,
   Logo,
   LogoIcon,
-  ButtonText,
-  EmailIcon,
-  LockIcon,
+  Text,
+  ItemsContainer,
 } from './styles';
-import {Input} from '../../components/Input';
 import {Button} from '../../components/Button';
 import {useForm, Controller} from 'react-hook-form';
 import {loginSchema} from '../../utils/schemas';
 import {useAuthContext} from '../../hooks/useAuth';
 import {AppError} from '../../utils/AppError';
 import {useTheme} from 'styled-components';
+import {AuthInput, MovingClock} from '../../components';
 
 type FormDataProps = {
   email: string;
@@ -26,6 +25,7 @@ type FormDataProps = {
 
 export const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
 
   const {COLORS} = useTheme();
 
@@ -58,49 +58,54 @@ export const Login: React.FC = () => {
 
   return (
     <Container behavior="height" keyboardVerticalOffset={-200}>
-      <LoginForm>
-        <Logo>
-          <LogoIcon />
-        </Logo>
-        <Controller
-          name="email"
-          control={control}
-          render={({field: {onChange, value}}) => (
-            <Input
-              labelIcon={<EmailIcon />}
-              backgroundColor={COLORS.WHITE}
-              borderColor={COLORS.WHITE}
-              label="Email"
-              onChangeText={onChange}
-              value={value}
-              errorMessage={errors.email?.message}
-              inputMode="email"
-            />
-          )}
-        />
-        <Controller
-          name="password"
-          control={control}
-          render={({field: {onChange, value}}) => (
-            <Input
-              labelIcon={<LockIcon />}
-              backgroundColor={COLORS.WHITE}
-              borderColor={COLORS.WHITE}
-              label="Senha"
-              onChangeText={onChange}
-              value={value}
-              errorMessage={errors.password?.message}
-              secureTextEntry
-            />
-          )}
-        />
-        <Button isLoading={isLoading} onPress={handleSubmit(handleLogin)}>
-          {isLoading ? (
-            <ActivityIndicator size="small" color={COLORS.WHITE} />
-          ) : (
-            <ButtonText>Entrar</ButtonText>
-          )}
-        </Button>
+      <LoginForm
+        resizeMode="cover"
+        source={require('../../assets/login-bg.jpg')}>
+        <ItemsContainer width={80} height={20}>
+          <MovingClock />
+        </ItemsContainer>
+        <ItemsContainer height={25} width={80}>
+          <Controller
+            name="email"
+            control={control}
+            render={({field: {onChange, value}}) => (
+              <AuthInput
+                onChangeText={onChange}
+                value={value}
+                errorMessage={errors.email?.message}
+                inputMode="email"
+                label="Email"
+                iconType="email"
+              />
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            render={({field: {onChange, value}}) => (
+              <AuthInput
+                secureTextEntry={hidePassword}
+                hiddenPassword={hidePassword}
+                setPasswordVisibility={setHidePassword}
+                onChangeText={onChange}
+                value={value}
+                errorMessage={errors.password?.message}
+                label="Senha"
+                iconType="password"
+              />
+            )}
+          />
+        </ItemsContainer>
+        <ItemsContainer justifyContent="flex-start" gap={10} width={80}>
+          <Button isLoading={isLoading} onPress={handleSubmit(handleLogin)}>
+            {isLoading ? (
+              <ActivityIndicator size="small" color={COLORS.WHITE} />
+            ) : (
+              'Entrar'
+            )}
+          </Button>
+          <Text>Esqueci minha senha</Text>
+        </ItemsContainer>
       </LoginForm>
     </Container>
   );

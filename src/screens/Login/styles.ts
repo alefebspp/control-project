@@ -1,30 +1,50 @@
 import styled, {css} from 'styled-components/native';
 import {ClockClockwise, Envelope, LockKey} from 'phosphor-react-native';
+import {Button} from '../../components/Button';
+
+interface ItemsContainerProps {
+  width?: number;
+  height?: number;
+  flexDirection?: string;
+  justifyContent?: string;
+  gap?: number;
+}
 
 export const Container = styled.KeyboardAvoidingView`
   width: 100%;
   height: 100%;
-  background-color: ${({theme}) => theme.COLORS.GRAY_50};
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+  background-color: ${({theme}) => theme.COLORS.WHITE};
 `;
 
-export const LoginForm = styled.View`
-  border-radius: 5px;
+export const LoginForm = styled.ImageBackground`
   width: 100%;
-  height: 80%;
+  height: 100%;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
+  justify-content: space-evenly;
+  align-items: center;
 `;
 
-export const ButtonText = styled.Text`
+export const ItemsContainer = styled.View<ItemsContainerProps>`
+  ${props => css`
+    width: ${!props.width ? 'auto' : `${props.width}%`};
+    height: ${!props.height ? 'auto' : `${props.height}%`};
+    display: flex;
+    flex-direction: ${props.flexDirection ? props.flexDirection : 'column'};
+    justify-content: ${
+      props.justifyContent ? props.justifyContent : 'space-between'
+    };
+    gap: ${props.gap ? `${props.gap}px` : 0}
+    align-items: center;
+  `}
+`;
+
+export const Text = styled.Text`
   ${({theme}) => css`
     color: ${theme.COLORS.WHITE};
+    text-decoration: underline;
     font-family: ${theme.FONT_FAMILY.REGULAR};
-    font-size: ${theme.FONT_SIZE.LG}px;
-    font-weight: 700;
+    font-size: ${theme.FONT_SIZE.MD}px;
+    font-weight: 600;
   `}
 `;
 
