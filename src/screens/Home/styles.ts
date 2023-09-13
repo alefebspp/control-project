@@ -43,7 +43,7 @@ const windowWidth = Dimensions.get('screen').width;
 export const Container = styled.View`
   width: 100%;
   height: 100%;
-  background-color: ${({theme}) => theme.COLORS.GRAY_50};
+  background-color: ${({theme}) => theme.COLORS.WHITE};
 `;
 
 export const PageContainer = styled.View`
@@ -104,6 +104,8 @@ export const Header = styled(SafeAreaView)`
   width: 100%;
   height: 12%;
   background-color: ${({theme}) => theme.COLORS.WHITE};
+  border-bottom-width: 1px;
+  border-bottom-color: ${({theme}) => theme.COLORS.GRAY_100};
   justify-content: space-between;
   align-items: flex-end;
 `;
@@ -116,7 +118,8 @@ export const MonthStatisticContainer = styled(
     width: ${isOpen ? `${windowWidth - 20}px` : '40px'};
     border-radius: 10px;
     height: ${isOpen ? '25%' : '40px'};
-    background-color: ${theme.COLORS.WHITE};
+    background-color: ${isOpen ? theme.COLORS.WHITE : theme.COLORS.BLUE_300};
+    border: ${isOpen ? `1px solid ${theme.COLORS.GRAY_200}` : 0}
     bottom: 0;
     right: 0;
     margin: 0 10px 10px 10px;
@@ -154,7 +157,7 @@ export const TitleContainer = styled.View<TitleContainerProps>`
     width: ${width ? `${width}%` : '100%'};
     height: ${height ? `${height}%` : '30%'};
     ${borderBottonWidth && `border-bottom-width: ${borderBottonWidth}px`}
-    border-color: ${theme.COLORS.GRAY_50};
+    border-color: ${theme.COLORS.GRAY_100};
     justify-content: center;
     align-items: center;
     background-color: ${backgroundColor ? backgroundColor : ''};
@@ -186,7 +189,7 @@ export const AddRegistryIcon = styled(Clock).attrs(({theme}) => ({
 
 export const StatisticIcon = styled(ChartLineUp).attrs(({theme, color}) => ({
   size: 26,
-  color: color ? color : theme.COLORS.BLUE_200,
+  color: color ? color : theme.COLORS.WHITE,
 }))`
   margin: auto;
 `;

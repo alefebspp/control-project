@@ -9,7 +9,7 @@ export interface IconButtonProps {
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({theme}) => theme.COLORS.GRAY_50};
+  background-color: ${({theme}) => theme.COLORS.WHITE};
   gap: 10px;
 `;
 
@@ -20,6 +20,8 @@ export const Header = styled(SafeAreaView)`
   width: 100%;
   height: 12%;
   background-color: ${({theme}) => theme.COLORS.WHITE};
+  border-bottom-width: 1px;
+  border-bottom-color: ${({theme}) => theme.COLORS.GRAY_100};
   justify-content: space-between;
 `;
 
@@ -66,14 +68,14 @@ export const Registry = styled.View`
 
 export const DateText = styled.Text`
   ${({theme}) => css`
-    color: ${theme.COLORS.GRAY_300};
+    color: ${theme.COLORS.GRAY_200};
     font-size: ${theme.FONT_SIZE.MD}px;
   `}
 `;
 
 export const RegistryTypeLabel = styled.Text`
   ${({theme}) => css`
-    color: ${theme.COLORS.GRAY_300};
+    color: ${theme.COLORS.GRAY_200};
     font-size: ${theme.FONT_SIZE.MD}px;
     font-weight: 400;
   `}

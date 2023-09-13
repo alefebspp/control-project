@@ -17,9 +17,9 @@ export const StatisticShimmer = () => {
       style={{marginBottom: 8}}
       shimmerStyle={[{borderRadius: 15}]}
       shimmerColors={[
-        `${COLORS.GRAY_300}`,
+        `${COLORS.GRAY_50}`,
         `${COLORS.WHITE}`,
-        `${COLORS.GRAY_300}`,
+        `${COLORS.GRAY_50}`,
       ]}></ShimmerPlaceHolder>
   );
 };

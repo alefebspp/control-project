@@ -1,6 +1,6 @@
 import styled, {css} from 'styled-components/native';
 import {TouchableOpacity, Dimensions} from 'react-native';
-import {ClockClockwise, Check, X} from 'phosphor-react-native';
+import {ClockClockwise, Check, X, User} from 'phosphor-react-native';
 
 const windowHeight = Dimensions.get('screen').height;
 
@@ -24,7 +24,7 @@ export const StatusContainer = styled.TouchableOpacity`
   ${({theme}) => css`
     width: 100%;
     height: ${0.08 * windowHeight}px;
-    background-color: ${theme.COLORS.WHITE};
+    background-color: ${theme.COLORS.GRAY_50};
     flex-direction: row;
     justify-content: flex-start;
     gap: 5px;
@@ -100,7 +100,7 @@ export const DetailLabel = styled.Text<TextProps>`
 export const StatusLabel = styled.Text<StatusProps>`
   ${({theme, color}) => css`
     color: ${color ? color : theme.COLORS.GRAY_50};
-    font-size: ${theme.FONT_SIZE.MD}px;
+    font-size: ${theme.FONT_SIZE.SM}px;
     font-weight: 700;
   `}
 `;
@@ -130,6 +130,18 @@ export const ValidateButton = styled(TouchableOpacity)<StatusProps>`
   background-color: ${({color}) => color};
   border-radius: 10px;
 `;
+
+export const ReviewerAvatar = styled.Image`
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+`;
+
+export const AvatarIcon = styled(User).attrs(({theme, size}) => ({
+  size: 25,
+  color: theme.COLORS.GRAY_200,
+  weight: 'fill',
+}))``;
 
 export const PendingIcon = styled(ClockClockwise).attrs(({theme, size}) => ({
   size: size,

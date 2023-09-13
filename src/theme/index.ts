@@ -10,6 +10,7 @@ export default {
     BLUE_200: '#48cae4',
     BLUE_300: '#00b4d8',
     BLUE_400: '#023e8a',
+    MARINE_BLUE: '#00224B',
     ERROR: '#FF0000',
     PENDING: '#FFD580',
     WARNING: '#ffcc00',

@@ -20,7 +20,7 @@ export const listAdjustmentsRequest = async (
 
     const {data} = await api.get(`/requests${url}`);
 
-    return data;
+    return data.adjustments;
   } catch (error) {
     throw error;
   }

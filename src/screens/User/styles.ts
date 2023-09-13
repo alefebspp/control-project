@@ -25,7 +25,7 @@ export interface IconButtonProps {
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({theme}) => theme.COLORS.GRAY_50};
+  background-color: ${({theme}) => theme.COLORS.WHITE};
   gap: 10px;
 `;
 
@@ -36,6 +36,8 @@ export const Header = styled(SafeAreaView)`
   width: 100%;
   height: 12%;
   background-color: ${({theme}) => theme.COLORS.WHITE};
+  border-bottom-width: 1px;
+  border-bottom-color: ${({theme}) => theme.COLORS.GRAY_100};
   justify-content: space-between;
 `;
 
@@ -67,11 +69,11 @@ export const UserInfosContent = styled.View<UserInfosContentProps>`
 `;
 
 export const UserShiftContainer = styled.View<UserShiftContainerProps>`
-  ${({width, justifyContent}) => css`
+  ${({width, justifyContent, theme}) => css`
     width: ${width ? `${width}%` : '100%'};
     flex-direction: row;
     justify-content: ${justifyContent ? justifyContent : 'space-between'};
-    background-color: white;
+    background-color: ${theme.COLORS.GRAY_50};
   `}
 `;
 

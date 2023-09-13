@@ -1,12 +1,20 @@
 import {ScrollView} from 'react-native';
 import {Adjustment, Empty, Select} from '../../components';
 import {useAdjustmentsRequests} from '../../hooks/useAdjustmentsRequests';
-import {AdjustmentsContainer, Header, PageContainer} from './styles';
+import {
+  AdjustmentIcon,
+  AdjustmentsContainer,
+  Header,
+  PageContainer,
+  Title,
+  TitleContainer,
+} from './styles';
 import {Adjustment as AdjustmentInterface} from '../../services/AdjustmentsRequests/interface';
 import {getCurrentMonthAndYearDescription} from '../../utils';
 import {AdjustmentsShimmer} from './shimmer';
 import {useAuthContext} from '../../hooks/useAuth';
 import {useState} from 'react';
+import {useRefetchOnFocus} from '../../hooks/useRefetchOnFocus';
 
 export const Adjustments = () => {
   const currentDate = new Date();
@@ -18,14 +26,17 @@ export const Adjustments = () => {
 
   const {useListAdjustmentsRequest} = useAdjustmentsRequests({});
 
-  const {data: adjustments, isLoading} = useListAdjustmentsRequest(
-    user?.user_id,
-    period,
-  );
+  const {
+    data: adjustments,
+    isLoading,
+    refetch,
+  } = useListAdjustmentsRequest(user?.user_id, period);
 
   const currentMonthAndYearDescription = getCurrentMonthAndYearDescription();
 
   const emptyAdjustmentsData = adjustments?.length == 0;
+
+  useRefetchOnFocus(refetch);
 
   return (
     <PageContainer>

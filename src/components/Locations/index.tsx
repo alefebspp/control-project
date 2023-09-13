@@ -18,6 +18,7 @@ export const Locations = ({registry, isLoading}: LocationsProps) => {
     <LocationsContainer height={30}>
       <LocationsContainer height={100}>
         <LocationsContainer
+          applyTopBorder
           flexDirection="row"
           justifyContent="center"
           alignItems="center"

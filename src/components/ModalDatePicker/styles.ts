@@ -108,6 +108,7 @@ export const ModalDatePickerButton = styled(
   justify-content: center;
   align-items: center;
   background-color: ${({backgroundColor}) => backgroundColor};
+  border: 1px solid ${({theme}) => theme.COLORS.GRAY_100};
   border-radius: 10px;
 `;
 
