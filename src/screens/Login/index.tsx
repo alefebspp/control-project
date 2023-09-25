@@ -2,19 +2,12 @@ import {useState} from 'react';
 import {ActivityIndicator} from 'react-native';
 import Toast from 'react-native-toast-message';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {
-  LoginForm,
-  Container,
-  Logo,
-  LogoIcon,
-  Text,
-  ItemsContainer,
-} from './styles';
+import {LoginForm, Container, Text, ItemsContainer} from './styles';
 import {Button} from '../../components/Button';
 import {useForm, Controller} from 'react-hook-form';
 import {loginSchema} from '../../utils/schemas';
 import {useAuthContext} from '../../hooks/useAuth';
-import {AppError} from '../../utils/AppError';
+import {getErrorMessage} from '../../utils/AppError';
 import {useTheme} from 'styled-components';
 import {AuthInput, MovingClock} from '../../components';
 
@@ -37,7 +30,7 @@ export const Login: React.FC = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const {signIn, user} = useAuthContext();
+  const {signIn} = useAuthContext();
 
   const handleLogin = async ({email, password}: FormDataProps) => {
     try {
@@ -46,12 +39,11 @@ export const Login: React.FC = () => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      const isAppError = error instanceof AppError;
-      const title = isAppError ? error.message : 'Não foi possível fazer login';
+      const message = getErrorMessage(error);
       Toast.show({
         type: 'error',
         text1: 'Error',
-        text2: title,
+        text2: message,
       });
     }
   };

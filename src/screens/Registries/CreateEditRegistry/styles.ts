@@ -10,7 +10,7 @@ export interface IconButtonProps {
 export const Container = styled.View`
   flex: 1;
   background-color: ${({theme}) => theme.COLORS.WHITE};
-  gap: 10px;
+  //gap: 10px;
 `;
 
 export const Header = styled(SafeAreaView)`

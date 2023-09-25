@@ -1,18 +1,23 @@
-import React from 'react';
-import {Avatar} from '../../components';
+import React, {useState} from 'react';
+import {Avatar, Select} from '../../components';
 import {
   HeaderButton,
   AddRegistryIcon,
   Container,
   Header,
-  UserIcon,
+  PageContainer,
 } from './styles';
 import {Registries} from './Registries';
 import {getCurrentMonthAndYearDescription} from '../../utils';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '../../routes/interface';
+import {HoursBalance} from '../../components/HoursBalance';
 
 export const Home: React.FC = () => {
+  const currentDate = new Date();
+  const [period, setPeriod] = useState<string>(
+    `${currentDate.getFullYear()}-0${currentDate.getMonth() + 1}-01`,
+  );
   const {navigate} = useNavigation<NavigationProps>();
 
   const currentMonthAndYearDescription = getCurrentMonthAndYearDescription();
@@ -26,9 +31,14 @@ export const Home: React.FC = () => {
           <AddRegistryIcon />
         </HeaderButton>
       </Header>
-      <Registries
-        currentMonthAndYearDescription={currentMonthAndYearDescription}
-      />
+      <PageContainer>
+        <Select
+          setPeriod={setPeriod}
+          currentMonthDescription={currentMonthAndYearDescription}
+        />
+        <HoursBalance period={period} />
+        <Registries period={period} />
+      </PageContainer>
     </Container>
   );
 };
