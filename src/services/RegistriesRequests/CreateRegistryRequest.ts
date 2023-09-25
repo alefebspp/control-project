@@ -1,6 +1,7 @@
 import {api} from '../api';
 
 export interface CreateRegistryRequestData {
+  registry_type: string;
   collaborator_id: string | undefined;
   company_id: string | undefined;
   date: string;
@@ -17,11 +18,7 @@ export interface CreateRegistryRequestData {
 export const createRegistryRequest = async (
   requestData: CreateRegistryRequestData,
 ) => {
-  try {
-    const {data} = await api.post('/registry/create', requestData);
+  const {data} = await api.post('/registry/create', requestData);
 
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  return data;
 };
