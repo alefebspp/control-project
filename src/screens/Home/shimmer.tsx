@@ -37,126 +37,20 @@ export const RegistriesShimmer = () => {
         alignItems: 'center',
         justifyContent: 'flex-start',
       }}>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
-      <ShimmerPlaceHolder
-        width={windowWidth - 20}
-        height={40}
-        style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}
-        shimmerColors={[
-          `${COLORS.GRAY_50}`,
-          `${COLORS.GRAY_100}`,
-          `${COLORS.GRAY_50}`,
-        ]}></ShimmerPlaceHolder>
+      {[...Array(12).keys()].map(i => (
+        <ShimmerPlaceHolder
+          key={i}
+          width={windowWidth - 20}
+          height={40}
+          style={{marginBottom: 8}}
+          shimmerStyle={[{borderRadius: 5}]}
+          shimmerColors={[
+            `${COLORS.GRAY_50}`,
+            `${COLORS.WHITE}`,
+            `${COLORS.GRAY_50}`,
+          ]}
+        />
+      ))}
     </View>
   );
 };

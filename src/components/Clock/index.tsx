@@ -1,13 +1,41 @@
-import React, {useEffect, useState} from 'react';
-import {
-  resetDateTime,
-  getHourMinutesFormated,
-  checkIfCurrentDateEqualsRegistryDate,
-} from '../../utils';
-import {ClockText, Container} from './styles';
-import {ClockProps} from './interface';
+import {useEffect, useState} from 'react';
 
-export const Clock = ({registryDate}: ClockProps) => {
+import {
+  LocationClockContainer,
+  CalendarClockIcon,
+  ClockText,
+  LabelContainer,
+} from './styles';
+import {Container} from '../../theme/layout';
+
+import {LocationClockProps} from './interface';
+
+import {
+  checkIfCurrentDateEqualsRegistryDate,
+  getHourMinutesFormated,
+  resetDateTime,
+} from '../../utils';
+
+export const Clock = ({registryDate}: LocationClockProps) => {
+  return (
+    <Container height={60}>
+      <Container flexDirection="row" percentageValue height={100} width={100}>
+        <Container percentageValue height={100} width={20}>
+          <LocationClockContainer>
+            <CalendarClockIcon />
+          </LocationClockContainer>
+        </Container>
+        <Container percentageValue height={100} width={80}>
+          <LocationClockContainer>
+            <Label registryDate={registryDate} />
+          </LocationClockContainer>
+        </Container>
+      </Container>
+    </Container>
+  );
+};
+
+const Label = ({registryDate}: LocationClockProps) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const formatedRegistryDate = resetDateTime(registryDate);
@@ -38,9 +66,8 @@ export const Clock = ({registryDate}: ClockProps) => {
   const formatNumber = (numero: number) => {
     return numero.toString().padStart(2, '0');
   };
-
   return (
-    <Container
+    <LabelContainer
       justifyContent={
         currentDateEqualsRegistryDate ? 'space-evenly' : 'center'
       }>
@@ -50,6 +77,6 @@ export const Clock = ({registryDate}: ClockProps) => {
           : null}
       </ClockText>
       <ClockText>{getFormatedDate()}</ClockText>
-    </Container>
+    </LabelContainer>
   );
 };

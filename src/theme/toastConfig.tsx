@@ -20,7 +20,7 @@ const toastConfig = {
         color: 'white',
       }}
       text2Style={{
-        fontSize: 15,
+        fontSize: 12,
         color: 'white',
       }}
     />
@@ -32,7 +32,7 @@ const toastConfig = {
         borderLeftWidth: 0,
       }}
       contentContainerStyle={{
-        backgroundColor: '#FFD580',
+        backgroundColor: '#00224B',
         borderRadius: 0,
       }}
       text1Style={{

@@ -2,6 +2,7 @@ import {api} from '../api';
 
 interface RequestData {
   registryId: string | undefined;
+  registryType: string;
   registryData: {
     start?: string;
     start_location?: string;
@@ -14,12 +15,16 @@ interface RequestData {
   };
 }
 
-export const updateRegistryRequest = async (requestData: RequestData) => {
+export const updateRegistryRequest = async ({
+  registryId,
+  registryData,
+  registryType,
+}: RequestData) => {
   try {
-    const {data} = await api.patch(
-      `registry/${requestData.registryId}`,
-      requestData.registryData,
-    );
+    const {data} = await api.patch(`registry/${registryId}`, {
+      registry_type: registryType,
+      ...registryData,
+    });
 
     return data;
   } catch (error) {

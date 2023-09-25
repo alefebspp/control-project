@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction} from 'react';
 
-export interface PageProps {
+export interface HoursBalanceProps {
   period: string;
 }

@@ -1,24 +1,42 @@
+import {MapPin, CalendarClock} from 'lucide-react-native';
 import styled, {css} from 'styled-components/native';
 
-interface ContainerProps {
+interface LabelContainerProps {
   justifyContent: string;
 }
 
-export const Container = styled.View<ContainerProps>`
+export const LocationClockContainer = styled.View`
   width: 100%;
-  height: 10%;
-  background-color: ${({theme}) => theme.COLORS.WHITE};
-  border: 1px solid ${({theme}) => theme.COLORS.GRAY_100};
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-width: 1px;
+  border-color: ${({theme}) => theme.COLORS.GRAY_100};
+`;
+
+export const LabelContainer = styled.View<LabelContainerProps>`
+  width: 100%;
+  height: 100%;
   justify-content: ${({justifyContent}) => justifyContent};
   align-items: center;
-  border-radius: 5px;
   flex-direction: row;
 `;
 
 export const ClockText = styled.Text`
   ${({theme}) => css`
-    font-family: ${theme.FONT_FAMILY.BOLD};
-    font-size: ${theme.FONT_SIZE.XL}px;
+    font-weight: 600;
+    font-size: ${theme.FONT_SIZE.LG}px;
     color: ${theme.COLORS.GRAY_200};
   `}
 `;
+
+export const LocationIcon = styled(MapPin).attrs(({theme}) => ({
+  size: 36,
+  color: theme.COLORS.GRAY_200,
+}))``;
+
+export const CalendarClockIcon = styled(CalendarClock).attrs(({theme}) => ({
+  size: 36,
+  color: theme.COLORS.GRAY_200,
+}))``;

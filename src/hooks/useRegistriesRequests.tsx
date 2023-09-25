@@ -1,73 +1,68 @@
-import {useQuery, useMutation} from '@tanstack/react-query';
-import {UseRegistriesRequestsProps} from './interface';
+import {useQuery, useMutation, useQueryClient} from '@tanstack/react-query';
 import {
-  ListRegistriesRequest,
   createRegistryRequest,
   findCollaboratorRegistries,
   updateRegistryRequest,
-  calculateRegistriesHours,
 } from '../services/RegistriesRequests';
 
-export const useRegistriesRequests = ({
-  queryClient,
-}: UseRegistriesRequestsProps) => {
-  const listRegistries = () => {
-    return useQuery({
-      queryKey: ['registries'],
-      queryFn: ListRegistriesRequest,
-    });
-  };
+export const useRegistriesRequests = () => {
+  const queryClient = useQueryClient();
 
-  const useUpdateRegistryMutation = () => {
-    return useMutation({
+  const update = () => {
+    const {mutateAsync, isLoading} = useMutation({
       mutationFn: updateRegistryRequest,
       onSuccess: () => {
         queryClient?.invalidateQueries({queryKey: ['registry']});
         queryClient?.invalidateQueries({queryKey: ['registries']});
       },
     });
+
+    return {
+      execute: mutateAsync,
+      isLoading,
+    };
   };
 
-  const useCreateRegistryMutation = () => {
-    return useMutation({
+  const create = () => {
+    const {mutateAsync, isLoading} = useMutation({
       mutationFn: createRegistryRequest,
       onSuccess: () => {
         queryClient?.invalidateQueries({queryKey: ['registry']});
         queryClient?.invalidateQueries({queryKey: ['registries']});
       },
     });
+
+    return {
+      execute: mutateAsync,
+      isLoading,
+    };
   };
 
-  const useFindCollaboratorRegistries = (
+  const find = (
     collaboratorId?: string,
     date?: string,
     period?: string,
     enabled: boolean = true,
   ) => {
-    return useQuery({
+    const {data, isLoading, refetch} = useQuery({
       queryKey: ['registry', date, period],
       queryFn: () => findCollaboratorRegistries({collaboratorId, date, period}),
       enabled,
     });
-  };
 
-  const useCalculateRegistriesHours = (
-    period?: string,
-    collaborator_id?: string,
-    enabled: boolean = true,
-  ) => {
-    return useQuery({
-      queryKey: ['statistic', period],
-      queryFn: () => calculateRegistriesHours(period, collaborator_id),
-      enabled,
-    });
+    const isEmpty = data?.length === 0;
+
+    return {
+      data,
+      isLoading,
+      isEmpty,
+      refetch,
+    };
   };
 
   return {
-    listRegistries,
-    useCreateRegistryMutation,
-    useUpdateRegistryMutation,
-    useFindCollaboratorRegistries,
-    useCalculateRegistriesHours,
+    create,
+    update,
+    find,
   };
 };

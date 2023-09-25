@@ -15,7 +15,7 @@ import {
   ActionsContainer,
   UpdateIcon,
 } from './styles';
-import {ModalDatePicker, Clock, Locations} from '../../../components';
+import {ModalDatePicker, Locations, Clock} from '../../../components';
 import {
   getCurrentDate,
   formatRegistryTime,
@@ -38,12 +38,9 @@ export const CreateEditRegistry: React.FC = () => {
     ? transformDateToString(params?.registryDate)
     : getCurrentDate();
 
-  const {useFindCollaboratorRegistries} = useRegistriesRequests({});
+  const {find} = useRegistriesRequests();
 
-  const {data: registry, isLoading} = useFindCollaboratorRegistries(
-    user?.user_id,
-    currentDate,
-  );
+  const {data: registry, isLoading} = find(user?.user_id, currentDate);
 
   const handleGoBack = () => {
     navigate('home');
@@ -56,33 +53,34 @@ export const CreateEditRegistry: React.FC = () => {
           <BackIcon />
         </IconButton>
       </Header>
-
       {isLoading ? (
         <RegistryShimmer />
       ) : (
-        <ContentContainer>
+        <>
           <Clock registryDate={registry ? registry[0]?.date : undefined} />
-          <RegistryInput
-            registryType="start"
-            registry={registry ? registry[0] : undefined}
-            label="Entrada"
-          />
-          <RegistryInput
-            registryType="interval_start"
-            registry={registry ? registry[0] : undefined}
-            label="Início intervalo"
-          />
-          <RegistryInput
-            registryType="interval_end"
-            registry={registry ? registry[0] : undefined}
-            label="Fim intervalo"
-          />
-          <RegistryInput
-            registryType="end"
-            registry={registry ? registry[0] : undefined}
-            label="Saída"
-          />
-        </ContentContainer>
+          <ContentContainer>
+            <RegistryInput
+              registryType="start"
+              registry={registry ? registry[0] : undefined}
+              label="Entrada"
+            />
+            <RegistryInput
+              registryType="interval_start"
+              registry={registry ? registry[0] : undefined}
+              label="Início intervalo"
+            />
+            <RegistryInput
+              registryType="interval_end"
+              registry={registry ? registry[0] : undefined}
+              label="Fim intervalo"
+            />
+            <RegistryInput
+              registryType="end"
+              registry={registry ? registry[0] : undefined}
+              label="Saída"
+            />
+          </ContentContainer>
+        </>
       )}
       <Locations
         registry={registry ? registry[0] : undefined}

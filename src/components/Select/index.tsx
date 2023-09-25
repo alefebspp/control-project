@@ -16,13 +16,14 @@ export const Select = ({currentMonthDescription, setPeriod}: SelectProps) => {
         buttonStyle={{
           width: '100%',
           height: '100%',
-          backgroundColor: COLORS.BLUE_300,
-          borderRadius: 10,
+          backgroundColor: COLORS.WHITE,
+          borderBottomWidth: 1,
+          borderBottomColor: COLORS.GRAY_200,
         }}
         buttonTextStyle={{
-          color: COLORS.WHITE,
-          fontSize: 18,
-          fontWeight: '600',
+          color: COLORS.GRAY_200,
+          fontSize: 16,
+          fontWeight: '400',
         }}
         defaultButtonText={currentMonthDescription}
         onSelect={(selectedItem, index) => {

@@ -1,3 +1,3 @@
-export interface ClockProps {
-  registryDate: Date | undefined;
+export interface LocationClockProps {
+  registryDate?: Date;
 }

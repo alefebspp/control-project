@@ -1,4 +1,3 @@
-export {Clock} from './Clock';
 export {ModalDatePicker} from './ModalDatePicker';
 export {DatePicker} from './DatePicker';
 export {Input} from './Input';
@@ -10,3 +9,5 @@ export {Locations} from './Locations';
 export {Avatar} from './Avatar';
 export {AuthInput} from './Input/AuthInput';
 export {MovingClock} from './MovingClock';
+export {Clock} from './Clock';
+export * from './Loaders';
