@@ -1,16 +1,13 @@
 import {useState} from 'react';
 import {View, Modal, ActivityIndicator} from 'react-native';
 import Toast from 'react-native-toast-message';
-import Geolocation from '@react-native-community/geolocation';
 import {useTheme} from 'styled-components';
 import {useQueryClient} from '@tanstack/react-query';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useNavigation} from '@react-navigation/native';
 import {
-  getReverseGeocoding,
   getHourMinutesFormated,
-  getCurrentDate,
   requestSchema,
   checkIfCurrentDateEqualsRegistryDate,
   convertRegistryType,
@@ -33,11 +30,11 @@ import {
   RequestContainer,
 } from './styles';
 import {DatePickerProps, DatePickerTypeProps} from './interface';
-import {useRegistriesRequests} from '../../hooks/useRegistriesRequests';
 import {DatePicker, Input} from '../';
 import {useAdjustmentsRequests} from '../../hooks/useAdjustmentsRequests';
 import {NavigationProps} from '../../routes/interface';
-import {useAuthContext} from '../../hooks/useAuth';
+import {useRegistries} from '../../hooks/registries/useRegistries';
+import {CurrentLocation} from '../CurrentLocation';
 
 interface FormDataProps {
   reason: string;
@@ -45,87 +42,28 @@ interface FormDataProps {
 
 export const ModalDatePicker = ({registryType, registry}: DatePickerProps) => {
   const [addressLocation, setAddressLocation] = useState<string | undefined>();
-
   const [locationIsLoading, setLocationIsLoading] = useState<boolean>(false);
-
   const [hourAndMinutes, setHourAndMinutes] = useState<string | undefined>();
-
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const {COLORS} = useTheme();
-
-  const {user} = useAuthContext();
-
-  const queryClient = useQueryClient();
-
-  const {useCreateRegistryMutation, useUpdateRegistryMutation} =
-    useRegistriesRequests({queryClient});
-
-  const {mutateAsync: createRegistry, isLoading: creatingRegistry} =
-    useCreateRegistryMutation();
-
-  const {mutateAsync: updateRegistry, isLoading: updatingRegistry} =
-    useUpdateRegistryMutation();
-
-  const handleSetLocationAddress = async () => {
-    Geolocation.getCurrentPosition(async info => {
-      setLocationIsLoading(true);
-      const {coords} = info;
-      const address = await getReverseGeocoding(
-        coords.latitude,
-        coords.longitude,
-      );
-      setAddressLocation(address);
-      setLocationIsLoading(false);
-    });
-  };
+  const {createRegistry, updateRegistry} = useRegistries();
 
   const registryTypeAlreadyExists = registry?.[registryType];
+  const currentDateEqualsRegistryDate = checkIfCurrentDateEqualsRegistryDate(
+    registry?.date,
+  );
 
   const showDatePicker = async () => {
     setDatePickerVisibility(true);
     const currentHourAndMinutes = getHourMinutesFormated(new Date());
     !registryTypeAlreadyExists && setHourAndMinutes(currentHourAndMinutes);
-    await handleSetLocationAddress();
   };
 
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
     setHourAndMinutes(undefined);
   };
-
-  const handleCreateRegistry = async (
-    time: string | undefined,
-    location: string | undefined,
-  ) => {
-    const currentDate = getCurrentDate();
-    await createRegistry({
-      [registryType]: time,
-      [`${registryType}_location`]: location,
-      collaborator_id: user?.user_id,
-      date: currentDate,
-      company_id: user?.user_company,
-    });
-    hideDatePicker();
-  };
-
-  const handleUpdateRegistry = async (
-    time: string | undefined,
-    location: string | undefined,
-  ) => {
-    await updateRegistry({
-      registryId: registry?.id,
-      registryData: {
-        [registryType]: time,
-        [`${registryType}_location`]: location,
-      },
-    });
-    hideDatePicker();
-  };
-
-  const currentDateEqualsRegistryDate = checkIfCurrentDateEqualsRegistryDate(
-    registry?.date,
-  );
 
   return (
     <>
@@ -147,14 +85,10 @@ export const ModalDatePicker = ({registryType, registry}: DatePickerProps) => {
             />
           ) : (
             <ModalContent height={50}>
-              <LocationContainer height={30}>
-                <LocationIcon />
-                {locationIsLoading ? (
-                  <ActivityIndicator size="small" color={COLORS.WHITE} />
-                ) : (
-                  <Text>{addressLocation}</Text>
-                )}
-              </LocationContainer>
+              <CurrentLocation
+                setLoading={setLocationIsLoading}
+                setLocation={setAddressLocation}
+              />
               <TextContainer>
                 <TimeText>{hourAndMinutes}</TimeText>
               </TextContainer>
@@ -171,13 +105,24 @@ export const ModalDatePicker = ({registryType, registry}: DatePickerProps) => {
                         return;
                       }
                       if (registry) {
-                        handleUpdateRegistry(hourAndMinutes, addressLocation);
+                        updateRegistry.execute({
+                          time: hourAndMinutes,
+                          location: addressLocation,
+                          registryType,
+                          registryId: registry.id,
+                          closeModalFunction: hideDatePicker,
+                        });
                         return;
                       }
-                      handleCreateRegistry(hourAndMinutes, addressLocation);
+                      createRegistry.execute({
+                        time: hourAndMinutes,
+                        location: addressLocation,
+                        registryType,
+                        closeModalFunction: hideDatePicker,
+                      });
                     }}
                     backgroundColor={COLORS.BLUE_200}>
-                    {creatingRegistry || updatingRegistry ? (
+                    {createRegistry.isLoading || updateRegistry.isLoading ? (
                       <ActivityIndicator size="small" color={COLORS.WHITE} />
                     ) : (
                       <ActionButtonText>Adicionar</ActionButtonText>
