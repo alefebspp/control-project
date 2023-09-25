@@ -23,8 +23,8 @@ export const Container = styled.View`
 export const StatusContainer = styled.TouchableOpacity`
   ${({theme}) => css`
     width: 100%;
-    height: ${0.08 * windowHeight}px;
-    background-color: ${theme.COLORS.GRAY_50};
+    height: 80px;
+    border: 1px solid ${theme.COLORS.GRAY_200};
     flex-direction: row;
     justify-content: flex-start;
     gap: 5px;
@@ -59,7 +59,8 @@ export const DetailsContentContainer = styled.View`
 export const Detail = styled.View`
   width: 100%;
   padding: 5px;
-  background-color: ${({theme}) => theme.COLORS.GRAY_50};
+  border-bottom-width: 1px;
+  border-bottom-color: ${({theme}) => theme.COLORS.GRAY_100};
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
