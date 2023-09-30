@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {
   Container,
@@ -9,12 +8,14 @@ import {
 } from './styles';
 import {getHourMinutesFormated} from '../../utils';
 import {DatePickerProps} from './interface';
+import {useKeyboard} from '../../hooks/useKeyboard';
 
 export const DatePicker = ({
   setHourAndMinutes,
   hourAndMinutes,
 }: DatePickerProps) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const {keyboardIsVisible} = useKeyboard();
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -30,6 +31,10 @@ export const DatePicker = ({
     hideDatePicker();
   };
 
+  if (keyboardIsVisible) {
+    return null;
+  }
+
   return (
     <Container>
       <DatePickerButton onPress={showDatePicker}>
@@ -42,7 +47,7 @@ export const DatePicker = ({
         onCancel={hideDatePicker}
       />
       {hourAndMinutes ? (
-        <DatePickerText>Selecionado: {hourAndMinutes}</DatePickerText>
+        <DatePickerText>Horário selecionado: {hourAndMinutes}</DatePickerText>
       ) : (
         <DatePickerText>Selecionar horário</DatePickerText>
       )}
