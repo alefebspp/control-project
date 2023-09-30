@@ -14,8 +14,6 @@ export interface DatePickerProps {
 }
 
 export interface DatePickerTypeProps {
-  isLoading: boolean;
-  addressLocation: string | undefined;
   hideDatePicker: () => void;
   registry?: Registry | undefined;
   registryType: keyof Pick<
