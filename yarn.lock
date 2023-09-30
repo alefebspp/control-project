@@ -2848,7 +2848,6 @@ __metadata:
     jest: ^29.2.1
     lucide-react-native: ^0.276.0
     metro-react-native-babel-preset: 0.73.9
-    phosphor-react-native: ^1.1.2
     postcss: ^8.4.23
     prettier: ^2.4.1
     react: latest
@@ -3675,7 +3674,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001346, caniuse-lite@npm:^1.0.30001449":
+"caniuse-lite@npm:^1.0.30001449":
   version: 1.0.30001486
   resolution: "caniuse-lite@npm:1.0.30001486"
   checksum: 5e8c2ba2679e4ad17dea6d2761a6449b814441bfeac81af6cc9d58af187df6af4b79b27befcbfc4a557e720b21c0399a7d1911c8705922e38938dcc0f40b5d4b
@@ -8355,19 +8354,6 @@ __metadata:
   version: 4.0.0
   resolution: "path-type@npm:4.0.0"
   checksum: 5b1e2daa247062061325b8fdbfd1fb56dde0a448fb1455453276ea18c60685bdad23a445dc148cf87bc216be1573357509b7d4060494a6fd768c7efad833ee45
-  languageName: node
-  linkType: hard
-
-"phosphor-react-native@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "phosphor-react-native@npm:1.1.2"
-  dependencies:
-    caniuse-lite: ^1.0.30001346
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-    react-native-svg: "*"
-  checksum: 2cb2d97b46955229fea8bd5f07b3904f355367ce6926035e8172d1122648d5c1675faedeede1617c181d71a5505cd05dfcef05b2adca8f5e8b8d6da8eaa11c71
   languageName: node
   linkType: hard
 
