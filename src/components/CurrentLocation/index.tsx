@@ -1,16 +1,18 @@
 import {useEffect, useState} from 'react';
 import {LoadingDots} from '../Loaders';
 import {getReverseGeocoding} from '../../utils';
-import {LocationContainer, LocationIcon, Text} from './styles';
+import {LocationContainer, LocationIcon, Text, TextContainer} from './styles';
 import {CurrentLocationProps} from './interface';
 
 import Geolocation from '@react-native-community/geolocation';
 import Toast from 'react-native-toast-message';
+import {useTheme} from 'styled-components';
 
 export const CurrentLocation = ({
   setLocation,
   setLoading,
 }: CurrentLocationProps) => {
+  const {COLORS, FONT_SIZE} = useTheme();
   const [addressLocation, setAddressLocation] = useState<string | undefined>();
   const [locationIsLoading, setLocationIsLoading] = useState<boolean>(false);
 
@@ -51,12 +53,17 @@ export const CurrentLocation = ({
   }, [addressLocation]);
 
   return (
-    <LocationContainer height={20}>
+    <LocationContainer>
       {locationIsLoading ? (
         <LoadingDots />
       ) : (
         <>
-          <LocationIcon />
+          <TextContainer>
+            <LocationIcon />
+            <Text color={COLORS.BLUE_400} size={FONT_SIZE.SM}>
+              Local
+            </Text>
+          </TextContainer>
           <Text>{addressLocation}</Text>
         </>
       )}

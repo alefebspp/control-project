@@ -1,4 +1,3 @@
-import {View, Dimensions} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
 import {useTheme} from 'styled-components';
@@ -11,10 +10,7 @@ interface AvatarShimmerProps {
 }
 
 export const AvatarShimmer = ({size, headerAvatar}: AvatarShimmerProps) => {
-  const windowWidth = Dimensions.get('screen').width;
-  const windowHeight = Dimensions.get('screen').height;
   const {COLORS} = useTheme();
-  //margin: 0 10px 5px 10px;
 
   return (
     <ShimmerPlaceHolder
@@ -26,6 +22,11 @@ export const AvatarShimmer = ({size, headerAvatar}: AvatarShimmerProps) => {
           marginLeft: headerAvatar ? 10 : 0,
           marginBottom: headerAvatar ? 5 : 0,
         },
+      ]}
+      shimmerColors={[
+        `${COLORS.GRAY_50}`,
+        `${COLORS.WHITE}`,
+        `${COLORS.GRAY_50}`,
       ]}></ShimmerPlaceHolder>
   );
 };

@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {ScrollView} from 'react-native';
 import {useTheme} from 'styled-components';
 import {AdjustmentProps} from './interface';
 import {
@@ -18,10 +19,10 @@ import {
   DetailsContainer,
   TitleContainer,
   CloseButton,
-  DetailsContentContainer,
   Detail,
   ReviewerAvatar,
   AvatarIcon,
+  IconContainer,
 } from './styles';
 
 import {useAuthContext} from '../../hooks/useAuth';
@@ -59,17 +60,17 @@ export const Adjustment = ({adjustment}: AdjustmentProps) => {
   }, [adjustment]);
 
   return activeDetailsContainer ? (
-    <DetailsContainer>
+    <DetailsContainer borderColor={statusColor}>
       <TitleContainer color={statusColor}>
         <StatusLabel color={COLORS.WHITE}>
           {convertStatusLabel(adjustment.status)}
         </StatusLabel>
         <CloseButton
           onPress={() => setActiveDetailsContainer(!activeDetailsContainer)}>
-          <RejectedIcon size={26} />
+          <RejectedIcon color={COLORS.WHITE} size={26} />
         </CloseButton>
       </TitleContainer>
-      <DetailsContentContainer>
+      <ScrollView nestedScrollEnabled={true}>
         <Detail>
           <DetailLabel size={FONT_SIZE.XS}>
             Requisitado por:
@@ -147,19 +148,21 @@ export const Adjustment = ({adjustment}: AdjustmentProps) => {
               </DetailLabel>
             </Detail>
           ))}
-      </DetailsContentContainer>
+      </ScrollView>
     </DetailsContainer>
   ) : (
     <StatusContainer
       onPress={() => setActiveDetailsContainer(!activeDetailsContainer)}>
-      <StatusIconContainer color={statusColor}>
-        {adjustment.status == 'PENDING' ? (
-          <PendingIcon size={36} />
-        ) : adjustment.status == 'ACCEPTED' ? (
-          <AcceptedIcon size={36} />
-        ) : (
-          <RejectedIcon size={36} />
-        )}
+      <StatusIconContainer>
+        <IconContainer>
+          {adjustment.status == 'PENDING' ? (
+            <PendingIcon />
+          ) : adjustment.status == 'ACCEPTED' ? (
+            <AcceptedIcon />
+          ) : (
+            <RejectedIcon />
+          )}
+        </IconContainer>
       </StatusIconContainer>
       <StatusDetailsContainer>
         <DetailLabel weight={400}>

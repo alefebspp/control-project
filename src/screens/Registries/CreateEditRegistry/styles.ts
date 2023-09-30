@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components/native';
-import {CaretLeft, X, ClockClockwise} from 'phosphor-react-native';
+import {ChevronLeft, History} from 'lucide-react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 export interface IconButtonProps {
@@ -59,7 +59,6 @@ export const RegistryContainer = styled.View`
 
 export const Registry = styled.View`
   background-color: ${({theme}) => theme.COLORS.WHITE};
-  border: 1px solid ${({theme}) => theme.COLORS.GRAY_100};
   height: 50px;
   justify-content: center;
   align-items: center;
@@ -76,7 +75,7 @@ export const DateText = styled.Text`
 export const RegistryTypeLabel = styled.Text`
   ${({theme}) => css`
     color: ${theme.COLORS.GRAY_200};
-    font-size: ${theme.FONT_SIZE.MD}px;
+    font-size: ${theme.FONT_SIZE.SM}px;
     font-weight: 400;
   `}
 `;
@@ -90,17 +89,12 @@ export const ActionsContainer = styled.View`
   gap: 10px;
 `;
 
-export const UpdateIcon = styled(ClockClockwise).attrs(({theme}) => ({
+export const UpdateIcon = styled(History).attrs(({theme}) => ({
   size: 36,
   color: theme.COLORS.PENDING,
 }))``;
 
-export const BackIcon = styled(CaretLeft).attrs(({theme}) => ({
+export const BackIcon = styled(ChevronLeft).attrs(({theme}) => ({
   size: 36,
   color: theme.COLORS.GRAY_300,
-}))``;
-
-export const DeleteIcon = styled(X).attrs(({theme}) => ({
-  size: 36,
-  color: 'red',
 }))``;

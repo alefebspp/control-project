@@ -3,7 +3,7 @@ import {
   createRegistryRequest,
   findCollaboratorRegistries,
   updateRegistryRequest,
-} from '../services/RegistriesRequests';
+} from '../../services/RegistriesRequests';
 
 export const useRegistriesRequests = () => {
   const queryClient = useQueryClient();

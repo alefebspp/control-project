@@ -20,12 +20,15 @@ export const Locations = ({registry, isLoading}: LocationsProps) => {
         <LocationsContainer
           applyTopBorder
           flexDirection="row"
-          justifyContent="center"
+          justifyContent="flex-start"
           alignItems="center"
           height={20}>
           <PrimaryLocationIcon />
-          <LocationLabel fontSize={FONT_SIZE.LG} fontWeight={500}>
-            LOCAIS
+          <LocationLabel
+            color={COLORS.BLUE_400}
+            fontSize={FONT_SIZE.LG}
+            fontWeight={500}>
+            Locais
           </LocationLabel>
         </LocationsContainer>
 

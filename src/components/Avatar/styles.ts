@@ -1,4 +1,4 @@
-import {ArrowsClockwise, User} from 'phosphor-react-native';
+import {UserCircle, RefreshCw} from 'lucide-react-native';
 import {TouchableOpacity} from 'react-native';
 import styled, {css} from 'styled-components/native';
 
@@ -18,7 +18,6 @@ export const AvatarButton = styled(TouchableOpacity)<AvatarButtonProps>`
     border-radius: ${size / 2}px;
     justify-content: center;
     align-items: center;
-    background-color: ${theme.COLORS.GRAY_100};
     margin: ${headerAvatar ? '0 10px 5px 10px' : 0};
   `}
 `;
@@ -36,17 +35,16 @@ export const ChangeAvatarButton = styled(TouchableOpacity)`
   `}
 `;
 
-export const ChangeIcon = styled(ArrowsClockwise).attrs(({theme}) => ({
+export const ChangeIcon = styled(RefreshCw).attrs(({theme}) => ({
   size: 18,
   color: theme.COLORS.BLUE_300,
 }))`
   margin: auto;
 `;
 
-export const AvatarIcon = styled(User).attrs(({theme, size}) => ({
+export const AvatarIcon = styled(UserCircle).attrs(({theme, size}) => ({
   size: size,
   color: theme.COLORS.GRAY_200,
-  weight: 'fill',
 }))``;
 
 export const UserAvatar = styled.Image<UserAvatarProps>`

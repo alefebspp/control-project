@@ -1,5 +1,12 @@
-import styled, {css} from 'styled-components/native';
-import {Clock, NotePencil, MapPin, ClockClockwise} from 'phosphor-react-native';
+import styled from 'styled-components/native';
+import {
+  CalendarPlus,
+  MessageSquare,
+  Pencil,
+  X,
+  History,
+  Clock,
+} from 'lucide-react-native';
 import {TouchableOpacity} from 'react-native';
 
 interface DatePickerButtonProps {
@@ -14,11 +21,18 @@ interface ActionButtonProps {
   backgroundColor: string;
 }
 
+interface TextStyleProps {
+  color?: string;
+  size?: number;
+  weight?: number;
+}
+
 export const ModalContainer = styled.View`
   width: 100%;
   height: 100%;
   justify-content: flex-end;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export const ModalContent = styled.View<ContainerContentProps>`
@@ -28,26 +42,24 @@ export const ModalContent = styled.View<ContainerContentProps>`
   flex-direction: column;
   justify-content: space-between;
   padding: 0 0 10px 0;
-  border-radius: 10px;
 `;
 
-export const LocationContainer = styled.View<ContainerContentProps>`
-  flex-direction: column;
+export const ModalHeader = styled.View`
   width: 100%;
-  justify-content: center;
+  height: 80px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-color: ${({theme}) => theme.COLORS.GRAY_100};
+  padding: 0 15px;
   align-items: center;
-  height: ${({height}) => height}%;
-  background-color: ${({theme}) => theme.COLORS.GRAY_200};
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 0 10px 10px 10px;
+  flex-direction: row;
+  gap: 10px;
 `;
 
 export const RequestContainer = styled.View`
-  width: 100%;
-  padding: 0 10px;
-  height: 50%;
-  justify-content: space-between;
+  padding: 0 15px;
+  flex: 1;
+  justify-content: space-evenly;
 `;
 
 export const ButtonsContainer = styled.View<ContainerContentProps>`
@@ -58,47 +70,40 @@ export const ButtonsContainer = styled.View<ContainerContentProps>`
   align-items: center;
 `;
 
-export const ActionButton = styled(TouchableOpacity)<ActionButtonProps>`
-  width: 120px;
-  height: 40px;
-  background-color: ${({backgroundColor}) => backgroundColor};
+export const CloseButton = styled(TouchableOpacity)`
+  width: 36px;
+  height: 36px;
+  background-color: ${({theme}) => theme.COLORS.GRAY_50};
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-`;
-
-export const ActionButtonText = styled.Text`
-  ${({theme}) => css`
-    color: ${theme.COLORS.WHITE};
-    font-size: ${theme.FONT_SIZE.MD}px;
-    font-weight: bold;
-  `}
+  margin-left: auto;
 `;
 
 export const TextContainer = styled.View`
   width: 100%;
-  height: 30%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px 0;
+  border: 1px solid red;
 `;
 
 export const TimeText = styled.Text`
   font-size: 58px;
   color: ${({theme}) => theme.COLORS.GRAY_300};
+  margin: auto;
 `;
 
-export const RequestTitle = styled.Text`
-  font-size: ${({theme}) => theme.FONT_SIZE.LG}px;
-  color: ${({theme}) => theme.COLORS.PENDING};
-  font-weight: 500;
-  margin: 0 auto;
-`;
-
-export const Text = styled.Text`
-  font-size: ${({theme}) => theme.FONT_SIZE.SM}px;
-  color: ${({theme}) => theme.COLORS.WHITE};
+export const Text = styled.Text<TextStyleProps>`
+  font-size: ${({theme, size}) => (size ? size : theme.FONT_SIZE.SM)}px;
+  color: ${({theme, color}) => (color ? color : theme.COLORS.WHITE)};
+  font-weight: ${({weight}) => (weight ? weight : 400)};
   text-align: center;
 `;
+
+export const InputContainer = styled.View``;
 
 export const ModalDatePickerButton = styled(
   TouchableOpacity,
@@ -116,13 +121,27 @@ export const DatePickerIcon = styled(Clock).attrs(({theme}) => ({
   color: theme.COLORS.BLUE_300,
 }))``;
 
-export const UpdateIcon = styled(ClockClockwise).attrs(({theme}) => ({
+export const UpdateIcon = styled(History).attrs(({theme}) => ({
   size: 36,
   color: theme.COLORS.PENDING,
 }))``;
 
-export const LocationIcon = styled(MapPin).attrs(({theme}) => ({
-  size: 36,
-  color: theme.COLORS.WHITE,
-  weight: 'fill',
+export const CalendarIcon = styled(CalendarPlus).attrs(({theme}) => ({
+  size: 32,
+  color: theme.COLORS.BLUE_300,
+}))``;
+
+export const PencilIcon = styled(Pencil).attrs(({theme}) => ({
+  size: 32,
+  color: theme.COLORS.BLUE_300,
+}))``;
+
+export const CloseIcon = styled(X).attrs(({theme}) => ({
+  size: 26,
+  color: theme.COLORS.GRAY_200,
+}))``;
+
+export const MessageIcon = styled(MessageSquare).attrs(({theme}) => ({
+  size: 28,
+  color: theme.COLORS.BLUE_300,
 }))``;

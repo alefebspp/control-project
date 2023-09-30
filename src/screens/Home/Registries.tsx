@@ -7,12 +7,12 @@ import {
   RegistryText,
   RegistryTextContainer,
 } from './styles';
-import {useRegistriesRequests} from '../../hooks/useRegistriesRequests';
+import {useRegistriesRequests} from '../../hooks/requests/useRegistriesRequests';
 import {formatDateToDayMonth, formatRegistryTime} from '../../utils';
 import {Empty} from '../../components';
 import {Registry as RegistryInterface} from '../../services/RegistriesRequests/interface';
 import {PageProps} from './interface';
-import {useRefetchOnFocus} from '../../hooks/useRefetchOnFocus';
+import {useRefetchOnFocus} from '../../hooks/requests/useRefetchOnFocus';
 import {RegistriesShimmer} from './shimmer';
 
 export const Registries = ({period}: PageProps) => {
@@ -30,7 +30,6 @@ export const Registries = ({period}: PageProps) => {
     refetch,
     isEmpty,
   } = find(user?.user_id, undefined, period, cacheResponse);
-
 
   useRefetchOnFocus(refetch);
 

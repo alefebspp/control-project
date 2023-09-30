@@ -24,7 +24,7 @@ export const InputContainer = styled(TextInput)<InputContainerProps>`
 `;
 
 export const Container = styled.View<ContainerProps>`
-  ${({theme, flexDirection, gap, alignItems}) => css`
+  ${({flexDirection, gap, alignItems}) => css`
     flex-direction: ${flexDirection ? flexDirection : 'column'};
     gap: ${gap ? `${gap}px` : 0};
     ${alignItems && `align-items: ${alignItems}`}
@@ -40,7 +40,7 @@ export const ErrorMessageText = styled.Text`
 
 export const InputLabel = styled.Text`
   ${({theme}) => css`
-    font-size: ${theme.FONT_SIZE.MD}px;
-    color: ${theme.COLORS.GRAY_200};
+    font-size: ${theme.FONT_SIZE.SM}px;
+    color: ${theme.COLORS.BLUE_400};
   `}
 `;

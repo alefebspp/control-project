@@ -18,13 +18,17 @@ export const LocationsShimmer = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: COLORS.GRAY_100,
       }}>
       <ShimmerPlaceHolder
         width={windowWidth}
         height={0.3 * windowHeight}
         style={{marginBottom: 8}}
-        shimmerStyle={[{borderRadius: 5}]}></ShimmerPlaceHolder>
+        shimmerStyle={[{borderRadius: 5}]}
+        shimmerColors={[
+          `${COLORS.GRAY_50}`,
+          `${COLORS.WHITE}`,
+          `${COLORS.GRAY_50}`,
+        ]}></ShimmerPlaceHolder>
     </View>
   );
 };

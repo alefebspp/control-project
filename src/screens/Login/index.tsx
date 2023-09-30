@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import {ActivityIndicator} from 'react-native';
 import Toast from 'react-native-toast-message';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {LoginForm, Container, Text, ItemsContainer} from './styles';
@@ -8,7 +7,6 @@ import {useForm, Controller} from 'react-hook-form';
 import {loginSchema} from '../../utils/schemas';
 import {useAuthContext} from '../../hooks/useAuth';
 import {getErrorMessage} from '../../utils/AppError';
-import {useTheme} from 'styled-components';
 import {AuthInput, MovingClock} from '../../components';
 
 type FormDataProps = {
@@ -19,8 +17,6 @@ type FormDataProps = {
 export const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
-
-  const {COLORS} = useTheme();
 
   const {
     control,
@@ -90,11 +86,7 @@ export const Login: React.FC = () => {
         </ItemsContainer>
         <ItemsContainer justifyContent="flex-start" gap={10} width={80}>
           <Button isLoading={isLoading} onPress={handleSubmit(handleLogin)}>
-            {isLoading ? (
-              <ActivityIndicator size="small" color={COLORS.WHITE} />
-            ) : (
-              'Entrar'
-            )}
+            Entrar
           </Button>
           <Text>Esqueci minha senha</Text>
         </ItemsContainer>

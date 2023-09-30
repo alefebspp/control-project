@@ -5,6 +5,8 @@ import {
   CalendarClockIcon,
   ClockText,
   LabelContainer,
+  CalendarCheckIcon,
+  AdjustmentTypeText,
 } from './styles';
 import {Container} from '../../theme/layout';
 
@@ -16,18 +18,40 @@ import {
   resetDateTime,
 } from '../../utils';
 
-export const Clock = ({registryDate}: LocationClockProps) => {
+export const Clock = ({registryDate, adjustmentInfo}: LocationClockProps) => {
+  const containsAdjustmentInfo = adjustmentInfo != undefined;
+
+  console.log('ADJUSTMENT INFO:', adjustmentInfo);
+
   return (
     <Container height={60}>
       <Container flexDirection="row" percentageValue height={100} width={100}>
-        <Container percentageValue height={100} width={20}>
-          <LocationClockContainer>
-            <CalendarClockIcon />
+        <Container
+          percentageValue
+          height={100}
+          width={adjustmentInfo ? 40 : 20}>
+          <LocationClockContainer adjustmentInfo={containsAdjustmentInfo}>
+            {containsAdjustmentInfo ? (
+              <CalendarCheckIcon />
+            ) : (
+              <CalendarClockIcon />
+            )}
+            {containsAdjustmentInfo && (
+              <AdjustmentTypeText>
+                {adjustmentInfo.registryType}
+              </AdjustmentTypeText>
+            )}
           </LocationClockContainer>
         </Container>
-        <Container percentageValue height={100} width={80}>
+        <Container
+          percentageValue
+          height={100}
+          width={adjustmentInfo ? 60 : 80}>
           <LocationClockContainer>
-            <Label registryDate={registryDate} />
+            <Label
+              adjustmentInfo={adjustmentInfo}
+              registryDate={registryDate}
+            />
           </LocationClockContainer>
         </Container>
       </Container>
@@ -35,7 +59,7 @@ export const Clock = ({registryDate}: LocationClockProps) => {
   );
 };
 
-const Label = ({registryDate}: LocationClockProps) => {
+const Label = ({registryDate, adjustmentInfo}: LocationClockProps) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const formatedRegistryDate = resetDateTime(registryDate);
@@ -63,18 +87,31 @@ const Label = ({registryDate}: LocationClockProps) => {
     return `${formatNumber(day)}/${formatNumber(month)}/${year}`;
   };
 
+  const defineClockText = () => {
+    if (currentDateEqualsRegistryDate && !adjustmentInfo) {
+      return getHourMinutesFormated(currentDate);
+    }
+    if (adjustmentInfo) {
+      return adjustmentInfo.previousHour ?? '--';
+    }
+    return null;
+  };
+
   const formatNumber = (numero: number) => {
     return numero.toString().padStart(2, '0');
   };
   return (
     <LabelContainer
       justifyContent={
-        currentDateEqualsRegistryDate ? 'space-evenly' : 'center'
+        currentDateEqualsRegistryDate || adjustmentInfo
+          ? 'space-evenly'
+          : 'center'
       }>
       <ClockText>
-        {currentDateEqualsRegistryDate
+        {defineClockText()}
+        {/* {currentDateEqualsRegistryDate
           ? getHourMinutesFormated(currentDate)
-          : null}
+          : null} */}
       </ClockText>
       <ClockText>{getFormatedDate()}</ClockText>
     </LabelContainer>

@@ -1,47 +1,69 @@
-import Toast, {
-  BaseToast,
-  ErrorToast,
-  InfoToast,
-} from 'react-native-toast-message';
+import styled from 'styled-components/native';
+import {BaseToast, ErrorToast, SuccessToast} from 'react-native-toast-message';
+import {AlertCircle, X, Check} from 'lucide-react-native';
+
+const IconContainer = styled.View`
+  width: 50px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
 
 const toastConfig = {
   error: (props: any) => (
     <ErrorToast
       {...props}
-      style={{
-        borderLeftWidth: 0,
-      }}
-      contentContainerStyle={{
-        backgroundColor: 'red',
-        borderRadius: 0,
-      }}
+      renderLeadingIcon={() => (
+        <IconContainer>
+          <X size={30} color="#FF0000" />
+        </IconContainer>
+      )}
+      style={{borderLeftColor: '#FF0000'}}
+      contentContainerStyle={{paddingHorizontal: 15}}
       text1Style={{
-        fontSize: 17,
-        color: 'white',
+        fontSize: 15,
+        fontWeight: '400',
       }}
       text2Style={{
-        fontSize: 12,
-        color: 'white',
+        color: 'black',
       }}
     />
   ),
-  info: (props: any) => (
-    <InfoToast
+  success: (props: any) => (
+    <SuccessToast
       {...props}
-      style={{
-        borderLeftWidth: 0,
-      }}
-      contentContainerStyle={{
-        backgroundColor: '#00224B',
-        borderRadius: 0,
-      }}
+      renderLeadingIcon={() => (
+        <IconContainer>
+          <Check size={30} color="#32CD32" />
+        </IconContainer>
+      )}
+      style={{borderLeftColor: '#32CD32'}}
+      contentContainerStyle={{paddingHorizontal: 15}}
       text1Style={{
-        fontSize: 17,
-        color: 'white',
+        fontSize: 15,
+        fontWeight: '400',
       }}
       text2Style={{
-        fontSize: 10,
-        color: 'white',
+        color: 'black',
+      }}
+    />
+  ),
+  warning: (props: any) => (
+    <BaseToast
+      {...props}
+      renderLeadingIcon={() => (
+        <IconContainer>
+          <AlertCircle size={30} color="#FFBF00" />
+        </IconContainer>
+      )}
+      style={{borderLeftColor: '#FFBF00'}}
+      contentContainerStyle={{paddingHorizontal: 15}}
+      text1Style={{
+        fontSize: 15,
+        fontWeight: '400',
+      }}
+      text2Style={{
+        color: 'black',
       }}
     />
   ),

@@ -1,5 +1,5 @@
 import {getCurrentDate} from '../../utils';
-import {useRegistriesRequests} from '../useRegistriesRequests';
+import {useRegistriesRequests} from '../requests/useRegistriesRequests';
 import {useAuthContext} from '../useAuth';
 import {getErrorMessage} from '../../utils/AppError';
 import Toast from 'react-native-toast-message';

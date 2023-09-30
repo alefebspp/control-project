@@ -2,8 +2,8 @@ import {useMutation, useQuery} from '@tanstack/react-query';
 import {
   findCollaboratorRequest,
   changeCollaboratorAvatarRequest,
-} from '../services/Collaborator';
-import {UseCollaboratorsRequestsProps} from './interface';
+} from '../../services/Collaborator';
+import {UseCollaboratorsRequestsProps} from '../interface';
 
 export const useCollaboratorRequests = ({
   queryClient,

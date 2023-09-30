@@ -1,11 +1,11 @@
 import {ScrollView} from 'react-native';
 import {Adjustment, Empty, Select} from '../../components';
-import {useAdjustmentsRequests} from '../../hooks/useAdjustmentsRequests';
+import {useAdjustmentsRequests} from '../../hooks/requests/useAdjustmentsRequests';
 import {
-  AdjustmentIcon,
   AdjustmentsContainer,
   Header,
   PageContainer,
+  AdjustmentsIcon,
   Title,
   TitleContainer,
 } from './styles';
@@ -14,12 +14,12 @@ import {getCurrentMonthAndYearDescription} from '../../utils';
 import {AdjustmentsShimmer} from './shimmer';
 import {useAuthContext} from '../../hooks/useAuth';
 import {useState} from 'react';
-import {useRefetchOnFocus} from '../../hooks/useRefetchOnFocus';
+import {useRefetchOnFocus} from '../../hooks/requests/useRefetchOnFocus';
 
 export const Adjustments = () => {
   const currentDate = new Date();
 
-  const [period, setPeriod] = useState<string | undefined>(
+  const [period, setPeriod] = useState<string>(
     `${currentDate.getFullYear()}-0${currentDate.getMonth() + 1}-01`,
   );
   const {user} = useAuthContext();
@@ -40,7 +40,12 @@ export const Adjustments = () => {
 
   return (
     <PageContainer>
-      <Header></Header>
+      <Header>
+        <TitleContainer>
+          <AdjustmentsIcon />
+          <Title>Ajustes</Title>
+        </TitleContainer>
+      </Header>
       <Select
         setPeriod={setPeriod}
         currentMonthDescription={currentMonthAndYearDescription}
