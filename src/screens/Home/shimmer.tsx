@@ -5,25 +5,6 @@ import {useTheme} from 'styled-components';
 
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
 
-export const StatisticShimmer = () => {
-  const windowWidth = Dimensions.get('screen').width;
-
-  const {COLORS} = useTheme();
-
-  return (
-    <ShimmerPlaceHolder
-      width={windowWidth * 0.35}
-      height={windowWidth * 0.15}
-      style={{marginBottom: 8}}
-      shimmerStyle={[{borderRadius: 15}]}
-      shimmerColors={[
-        `${COLORS.GRAY_50}`,
-        `${COLORS.WHITE}`,
-        `${COLORS.GRAY_50}`,
-      ]}></ShimmerPlaceHolder>
-  );
-};
-
 export const RegistriesShimmer = () => {
   const windowWidth = Dimensions.get('screen').width;
 
