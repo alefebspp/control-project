@@ -17,10 +17,8 @@ import {
   UserShiftContainer,
   IconButton,
   BackIcon,
-  UserPhotoIcon,
-  UserImage,
 } from './styles';
-import {useCollaboratorRequests} from '../../hooks/useCollaboratorRequests';
+import {useCollaboratorRequests} from '../../hooks/requests/useCollaboratorRequests';
 import {ShiftShimmer} from './shimmer';
 import {Avatar} from '../../components';
 

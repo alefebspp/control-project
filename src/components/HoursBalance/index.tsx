@@ -1,4 +1,4 @@
-import {useHourRecordRequests} from '../../hooks/useHourRecordRequests';
+import {useHourRecordRequests} from '../../hooks/requests/useHourRecordRequests';
 import {useAuthContext} from '../../hooks/useAuth';
 import {HoursBalanceProps} from './interface';
 import {
@@ -14,7 +14,7 @@ import {
   TotalIcon,
 } from './styles';
 import {HoursBalanceSkeleton} from './skeleton';
-import {useRefetchOnFocus} from '../../hooks/useRefetchOnFocus';
+import {useRefetchOnFocus} from '../../hooks/requests/useRefetchOnFocus';
 
 export const HoursBalance = ({period}: HoursBalanceProps) => {
   const {user} = useAuthContext();
