@@ -1,11 +1,11 @@
 import {useMutation, useQuery} from '@tanstack/react-query';
-import {UseAdjustmentsRequestsProps} from './interface';
+import {UseAdjustmentsRequestsProps} from '../interface';
 import {
   createAdjustmentRequest,
   listAdjustmentsRequest,
   findAdjustmentByRegistryIdRequest,
   validateAdjustmentRequest,
-} from '../services/AdjustmentsRequests';
+} from '../../services/AdjustmentsRequests';
 
 export const useAdjustmentsRequests = ({
   queryClient,
