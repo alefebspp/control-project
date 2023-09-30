@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {StyleSheet} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {
@@ -12,7 +13,6 @@ import {
   RegistryTypeLabel,
   DateText,
   Registry,
-  ActionsContainer,
   UpdateIcon,
 } from './styles';
 import {ModalDatePicker, Locations, Clock} from '../../../components';
@@ -21,7 +21,7 @@ import {
   formatRegistryTime,
   transformDateToString,
 } from '../../../utils';
-import {useRegistriesRequests} from '../../../hooks/useRegistriesRequests';
+import {useRegistriesRequests} from '../../../hooks/requests/useRegistriesRequests';
 import {useAuthContext} from '../../../hooks/useAuth';
 import {RouteProps, RegistryInputProps} from './interface';
 import {findAdjustmentByRegistryIdRequest} from '../../../services/AdjustmentsRequests';
@@ -108,7 +108,7 @@ const RegistryInput = ({registry, label, registryType}: RegistryInputProps) => {
 
   const showAdjustmentExistsToast = () => {
     Toast.show({
-      type: 'info',
+      type: 'warning',
       text1: 'Registro Pendente',
       text2: 'Já foi requisitado um ajuste para esse registro',
     });
@@ -121,7 +121,7 @@ const RegistryInput = ({registry, label, registryType}: RegistryInputProps) => {
   return (
     <InputContainer>
       <RegistryContainer>
-        <Registry>
+        <Registry style={styles.box}>
           <RegistryTypeLabel>{label}</RegistryTypeLabel>
           <DateText>
             {registryTypeAlreadyExists
@@ -131,16 +131,28 @@ const RegistryInput = ({registry, label, registryType}: RegistryInputProps) => {
         </Registry>
       </RegistryContainer>
       {adjustmentExists ? (
-        <IconButton onPress={showAdjustmentExistsToast} width={50} height={50}>
+        <IconButton
+          style={styles.box}
+          onPress={showAdjustmentExistsToast}
+          width={50}
+          height={50}>
           <UpdateIcon />
         </IconButton>
       ) : registryTypeAlreadyExists ? (
-        <ActionsContainer>
-          <ModalDatePicker registry={registry} registryType={registryType} />
-        </ActionsContainer>
+        <ModalDatePicker registry={registry} registryType={registryType} />
       ) : (
         <ModalDatePicker registry={registry} registryType={registryType} />
       )}
     </InputContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  box: {
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 3,
+  },
+});
