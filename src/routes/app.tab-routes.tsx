@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTheme} from 'styled-components';
-import {HouseLine, ClockClockwise} from 'phosphor-react-native';
+import {Home as HomeIcon, CalendarClock} from 'lucide-react-native';
 import {Home, Adjustments} from '../screens';
 import {useAuthContext} from '../hooks/useAuth';
 import {Loading} from '../components/Loading';
@@ -17,7 +17,12 @@ export const AppTabRoutes = () => {
   }
 
   return (
-    <Navigator screenOptions={{headerShown: false, tabBarShowLabel: false}}>
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: {backgroundColor: 'white'},
+      }}>
       <Screen
         name="registries"
         component={Home}
@@ -25,8 +30,8 @@ export const AppTabRoutes = () => {
           tabBarActiveTintColor: COLORS.BLUE_300,
           tabBarInactiveTintColor: COLORS.GRAY_200,
           tabBarIcon: ({focused}) => (
-            <HouseLine
-              size={32}
+            <HomeIcon
+              size={28}
               color={focused ? COLORS.BLUE_300 : COLORS.GRAY_200}
             />
           ),
@@ -39,8 +44,8 @@ export const AppTabRoutes = () => {
           tabBarActiveTintColor: COLORS.BLUE_300,
           tabBarInactiveTintColor: COLORS.GRAY_200,
           tabBarIcon: ({focused}) => (
-            <ClockClockwise
-              size={32}
+            <CalendarClock
+              size={28}
               color={focused ? COLORS.BLUE_300 : COLORS.GRAY_200}
             />
           ),
