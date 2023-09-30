@@ -1,6 +1,4 @@
 import styled, {css} from 'styled-components/native';
-import {ClockClockwise, Envelope, LockKey} from 'phosphor-react-native';
-import {Button} from '../../components/Button';
 
 interface ItemsContainerProps {
   width?: number;
@@ -57,21 +55,3 @@ export const Logo = styled.View`
   margin: 0 auto;
   border-radius: 50px;
 `;
-
-export const LogoIcon = styled(ClockClockwise).attrs(({theme}) => ({
-  size: 50,
-  weight: 'regular',
-  color: theme.COLORS.WHITE,
-}))``;
-
-export const EmailIcon = styled(Envelope).attrs(({theme}) => ({
-  size: 30,
-  weight: 'regular',
-  color: theme.COLORS.GRAY_200,
-}))``;
-
-export const LockIcon = styled(LockKey).attrs(({theme}) => ({
-  size: 30,
-  weight: 'regular',
-  color: theme.COLORS.GRAY_200,
-}))``;

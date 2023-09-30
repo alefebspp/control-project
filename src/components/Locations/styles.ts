@@ -1,4 +1,4 @@
-import {MapPin, MapPinLine} from 'phosphor-react-native';
+import {MapPin} from 'lucide-react-native';
 import styled, {css} from 'styled-components/native';
 
 interface LocationsContainerProps {
@@ -15,6 +15,7 @@ interface LocationLabelProps {
   fontSize?: number;
   fontWeight?: number;
   wrapText?: boolean;
+  color?: string;
 }
 
 export const LocationsContainer = styled.View<LocationsContainerProps>`
@@ -42,19 +43,21 @@ export const LocationsContainer = styled.View<LocationsContainerProps>`
 `;
 
 export const LocationLabel = styled.Text<LocationLabelProps>`
-  ${({theme, fontSize, fontWeight, wrapText}) => css`
+  ${({theme, fontSize, fontWeight, wrapText, color}) => css`
     font-size: ${fontSize}px;
     font-weight: ${fontWeight};
-    color: ${theme.COLORS.GRAY_300};
+    color: ${color ?? theme.COLORS.GRAY_300};
     flex-wrap: ${wrapText ? 'wrap' : 'nowrap'};
     flex-shrink: ${wrapText ? 1 : 0};
   `}
 `;
 
-export const PrimaryLocationIcon = styled(MapPinLine).attrs(({theme}) => ({
+export const PrimaryLocationIcon = styled(MapPin).attrs(({theme}) => ({
   size: 24,
-  color: theme.COLORS.GRAY_300,
-}))``;
+  color: theme.COLORS.BLUE_300,
+}))`
+  margin-left: 15px;
+`;
 
 export const SecondaryLocationIcon = styled(MapPin).attrs(({theme}) => ({
   size: 18,

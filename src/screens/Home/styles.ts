@@ -1,7 +1,7 @@
 import styled, {css} from 'styled-components/native';
-import {Clock, Calendar, User} from 'phosphor-react-native';
 import {TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {AlarmPlus} from 'lucide-react-native';
 
 interface HeaderButtonProps {
   lightBackground?: boolean;
@@ -57,12 +57,8 @@ export const HeaderButton = styled(TouchableOpacity)<HeaderButtonProps>`
   ${({theme, lightBackground}) => css`
     width: 36px;
     height: 36px;
-    border-radius: 18px;
     justify-content: center;
     align-items: center;
-    background-color: ${lightBackground
-      ? theme.COLORS.GRAY_100
-      : theme.COLORS.GRAY_300};
     margin: 0 10px 5px 10px;
   `}
 `;
@@ -79,19 +75,7 @@ export const Header = styled(SafeAreaView)`
   align-items: flex-end;
 `;
 
-export const UserIcon = styled(User).attrs(({theme}) => ({
-  size: 26,
-  color: theme.COLORS.GRAY_200,
-  weight: 'fill',
-}))``;
-
-export const AddRegistryIcon = styled(Clock).attrs(({theme}) => ({
-  size: 36,
-  color: theme.COLORS.WHITE,
-  weight: 'fill',
-}))``;
-
-export const CalendarIcon = styled(Calendar).attrs(({theme}) => ({
-  size: 46,
-  color: theme.COLORS.WHITE,
+export const AddRegistryIcon = styled(AlarmPlus).attrs(({theme}) => ({
+  size: 32,
+  color: theme.COLORS.GRAY_300,
 }))``;

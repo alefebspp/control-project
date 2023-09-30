@@ -1,7 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {Calendar, ClockClockwise} from 'phosphor-react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import styled, {css} from 'styled-components/native';
+import {CalendarClock} from 'lucide-react-native';
 
 export const PageContainer = styled.View`
   width: 100%;
@@ -24,7 +23,7 @@ export const Header = styled(SafeAreaView)`
 
 export const Title = styled.Text`
   ${({theme}) => css`
-    color: ${theme.COLORS.BLUE_300};
+    color: ${theme.COLORS.GRAY_300};
     font-size: ${theme.FONT_SIZE.LG}px;
     font-weight: 500;
   `}
@@ -33,12 +32,12 @@ export const Title = styled.Text`
 export const TitleContainer = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 10px;
   width: 100%;
   height: 100%;
-  padding: 10px 10px 0 10px;
+  padding: 10px 15px 0 15px;
 `;
 
 export const TitleSection = styled.View`
@@ -56,12 +55,7 @@ export const AdjustmentsContainer = styled.View`
   padding: 10px;
 `;
 
-export const CalendarIcon = styled(Calendar).attrs(({theme}) => ({
-  size: 46,
-  color: theme.COLORS.WHITE,
-}))``;
-
-export const AdjustmentIcon = styled(ClockClockwise).attrs(({theme}) => ({
-  size: 30,
+export const AdjustmentsIcon = styled(CalendarClock).attrs(({theme, size}) => ({
+  size: 28,
   color: theme.COLORS.BLUE_300,
 }))``;

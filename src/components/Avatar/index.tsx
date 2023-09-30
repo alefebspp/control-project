@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {useQueryClient} from '@tanstack/react-query';
-import {useCollaboratorRequests} from '../../hooks/useCollaboratorRequests';
+import {useCollaboratorRequests} from '../../hooks/requests/useCollaboratorRequests';
 import {AvatarProps} from './interface';
 import {useAuthContext} from '../../hooks/useAuth';
 import {
@@ -61,7 +61,7 @@ export const Avatar = ({headerAvatar, size, collaborator_id}: AvatarProps) => {
       {collaborator?.avatar ? (
         <UserAvatar size={size} source={{uri: collaborator.avatar}} />
       ) : (
-        <AvatarIcon size={size / 1.5} />
+        <AvatarIcon size={size} />
       )}
       {!headerAvatar && !collaborator_id && (
         <ChangeAvatarButton onPress={handleChangeUserAvatar}>

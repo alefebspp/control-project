@@ -1,6 +1,6 @@
 import styled, {css} from 'styled-components/native';
 import {TouchableOpacity, Dimensions} from 'react-native';
-import {ClockClockwise, Check, X, User} from 'phosphor-react-native';
+import {History, Check, X, UserCircle} from 'lucide-react-native';
 
 const windowHeight = Dimensions.get('screen').height;
 
@@ -14,17 +14,20 @@ interface TextProps {
   weight?: number;
 }
 
+interface StatusContainerStyleProps {
+  borderColor?: string;
+}
+
 export const Container = styled.View`
   width: 100%;
   height: 20%;
-  border: 1px solid red;
 `;
 
-export const StatusContainer = styled.TouchableOpacity`
+export const StatusContainer = styled.TouchableOpacity<StatusContainerStyleProps>`
   ${({theme}) => css`
     width: 100%;
     height: 80px;
-    border: 1px solid ${theme.COLORS.GRAY_200};
+    border: 2px solid ${theme.COLORS.GRAY_100};
     flex-direction: row;
     justify-content: flex-start;
     gap: 5px;
@@ -40,24 +43,19 @@ export const ResponseContainer = styled.View<StatusProps>`
   flex-direction: ${({rowDirection}) => (rowDirection ? 'row' : 'column')};
 `;
 
-export const DetailsContainer = styled.View`
-  ${({theme}) => css`
+export const DetailsContainer = styled.View<StatusContainerStyleProps>`
+  ${({theme, borderColor}) => css`
     width: 100%;
-    height: ${0.5 * windowHeight}px;
+    height: 300px;
     background-color: ${theme.COLORS.WHITE};
+    border: 2px solid ${borderColor};
     margin-bottom: 10px;
   `}
 `;
 
-export const DetailsContentContainer = styled.View`
-  width: 100%;
-  height: 80%;
-  padding: 5px;
-  gap: 5px;
-`;
-
 export const Detail = styled.View`
   width: 100%;
+  height: 50px;
   padding: 5px;
   border-bottom-width: 1px;
   border-bottom-color: ${({theme}) => theme.COLORS.GRAY_100};
@@ -106,13 +104,21 @@ export const StatusLabel = styled.Text<StatusProps>`
   `}
 `;
 
-export const StatusIconContainer = styled.View<StatusProps>`
+export const StatusIconContainer = styled.View`
   width: 20%;
   height: 100%;
   justify-content: center;
   align-items: center;
-  background-color: ${({color, theme}) =>
-    color ? color : theme.COLORS.GRAY_50};
+  background-color: ${({theme}) => theme.COLORS.GRAY_100};
+`;
+
+export const IconContainer = styled.View`
+  width: 46px;
+  height: 46px;
+  border-radius: 23px;
+  background-color: ${({theme}) => theme.COLORS.WHITE};
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ValidateButtonContainer = styled.View`
@@ -138,26 +144,22 @@ export const ReviewerAvatar = styled.Image`
   border-radius: 15px;
 `;
 
-export const AvatarIcon = styled(User).attrs(({theme, size}) => ({
+export const AvatarIcon = styled(UserCircle).attrs(({theme, size}) => ({
   size: 25,
   color: theme.COLORS.GRAY_200,
-  weight: 'fill',
 }))``;
 
-export const PendingIcon = styled(ClockClockwise).attrs(({theme, size}) => ({
+export const PendingIcon = styled(History).attrs(({theme, size}) => ({
   size: size,
-  color: theme.COLORS.WHITE,
-  weight: 'bold',
+  color: theme.COLORS.PENDING,
 }))``;
 
 export const AcceptedIcon = styled(Check).attrs(({theme, color, size}) => ({
   size: size,
-  color: color ? color : theme.COLORS.WHITE,
-  weight: 'bold',
+  color: color ? color : theme.COLORS.ACCEPTED,
 }))``;
 
-export const RejectedIcon = styled(X).attrs(({theme, size}) => ({
+export const RejectedIcon = styled(X).attrs(({theme, size, color}) => ({
   size: size,
-  color: theme.COLORS.WHITE,
-  weight: 'bold',
+  color: color ?? theme.COLORS.ERROR,
 }))``;

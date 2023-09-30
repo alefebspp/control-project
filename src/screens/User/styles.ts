@@ -1,6 +1,6 @@
 import styled, {css} from 'styled-components/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {CaretLeft, SignOut, UserFocus} from 'phosphor-react-native';
+import {DoorOpen, ChevronLeft} from 'lucide-react-native';
 
 interface UserInfosContentProps {
   height?: number;
@@ -121,19 +121,12 @@ export const UserImage = styled.Image`
   border-radius: 45px;
 `;
 
-export const SignOutIcon = styled(SignOut).attrs(({theme}) => ({
+export const SignOutIcon = styled(DoorOpen).attrs(({theme}) => ({
   size: 26,
   color: theme.COLORS.WHITE,
-  weight: 'bold',
 }))``;
 
-export const UserPhotoIcon = styled(UserFocus).attrs(({theme}) => ({
-  size: 76,
-  color: theme.COLORS.GRAY_200,
-  weight: 'light',
-}))``;
-
-export const BackIcon = styled(CaretLeft).attrs(({theme}) => ({
+export const BackIcon = styled(ChevronLeft).attrs(({theme}) => ({
   size: 36,
   color: theme.COLORS.GRAY_300,
 }))``;
