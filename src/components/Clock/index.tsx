@@ -21,8 +21,6 @@ import {
 export const Clock = ({registryDate, adjustmentInfo}: LocationClockProps) => {
   const containsAdjustmentInfo = adjustmentInfo != undefined;
 
-  console.log('ADJUSTMENT INFO:', adjustmentInfo);
-
   return (
     <Container height={60}>
       <Container flexDirection="row" percentageValue height={100} width={100}>

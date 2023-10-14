@@ -72,6 +72,14 @@ export const AuthContextProvider = ({children}: AuthContextProps) => {
     loadUserData();
   }, []);
 
+  useEffect(() => {
+    const subscribe = api.registerInterceptTokenManager(signOut);
+
+    return () => {
+      subscribe();
+    };
+  }, [signOut]);
+
   const authProviderValue = useMemo(
     () => ({
       signIn,
