@@ -10,4 +10,5 @@ export {Avatar} from './Avatar';
 export {AuthInput} from './Input/AuthInput';
 export {MovingClock} from './MovingClock';
 export {Clock} from './Clock';
+export {CustomModal} from './Modal';
 export * from './Loaders';
